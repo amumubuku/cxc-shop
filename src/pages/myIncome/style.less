@@ -8,8 +8,6 @@
   width: 100%;
   min-height: 100vh;
   background: rgba(248, 248, 248, 1);
-  padding-bottom: 179rpx;
-  box-sizing: border-box;
 }
 
 .top-wrap {
@@ -47,6 +45,8 @@
         width: 10rpx;
         height: 10rpx;
         margin-left: 5rpx;
+        background: url(https://img.icaixiaochu.com/5e723c5751744.png);
+        background-size: cover;
       }
     }
 
@@ -102,7 +102,9 @@
     .income-icon {
       width: 10rpx;
       height: 10rpx;
-      background: red;
+      background: url(https://img.icaixiaochu.com/5e723bf1d9094.png);
+      background-size: cover;
+      margin-left: 5rpx;
     }
   }
 }
@@ -245,6 +247,16 @@
   box-sizing: border-box;
   background: #fff;
   margin-top: 18rpx;
+  padding-bottom: 179rpx;
+  box-sizing: border-box;
+
+  .no-list {
+    width: 100%;
+    height: 685rpx;
+    background: url(https://img.icaixiaochu.com/5e7243ae575f3.png) no-repeat #fff;
+    background-size: 435rpx 312rpx;
+    background-position: center;
+  }
 
   .title-wrap {
     padding-left: 8rpx;
@@ -268,9 +280,21 @@
     border-bottom: 1px solid rgba(225, 225, 225, 1);
 
     .item-icon {
-      width: 56rpx;
+      width: 64rpx;
       height: 56rpx;
-      background: red;
+      background-size: cover!important;
+
+      &.item-icon-0 {
+        background: url(https://img.icaixiaochu.com/5e7242fc44f69.png);
+      }
+
+      &.item-icon-1 {
+        background: url(https://img.icaixiaochu.com/5e724326d507e.png);
+      }
+
+      &.item-icon-2 {
+        background: url(https://img.icaixiaochu.com/5e724315c0f56.png);
+      }
     }
 
     .item-img {
@@ -311,10 +335,17 @@
 .btn {
   width: 734rpx;
   height: 150rpx;
-  background: red;
+  background: url(https://img.icaixiaochu.com/5e723d944beba.png);
+  background-size: cover;
   position: fixed;
   bottom: 26rpx;
   left: 8rpx;
+
+  button {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
 }
 
 

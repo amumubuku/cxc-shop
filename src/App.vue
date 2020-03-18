@@ -46,4 +46,47 @@ export default {
   -webkit-transition: width 2s;
   -o-transition: width 2s;
 }
+
+.dis-flex {
+  display: flex;
+  flex-direction: row;
+}
+.vertical {
+  display: flex;
+  flex-direction: column;
+}
+.flex {
+  flex: 1;
+}
+.flex-top {
+  align-items: flex-start;
+}
+.flex-middle {
+  align-items: center;
+}
+.flex-bottom {
+  align-items: flex-end;
+}
+.flex-center {
+  justify-content: center;
+}
+.flex-left {
+  justify-content: flex-start;
+}
+.flex-right {
+  justify-content: flex-end;
+}
+.flex-around {
+  justify-content: space-around;
+}
+.flex-between {
+  justify-content: space-between;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex-middle-center {
+  align-items: center;
+  justify-content: center;
+}
 </style>

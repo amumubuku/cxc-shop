@@ -15,64 +15,132 @@
     height: 20rpx;
     background: rgba(225, 225, 225, 1);
     border-radius: 50%;
+  }
 
-    &.yellow {
-      background: #F8CF2C;
-    }
+  .yellow {
+    background: #F8CF2C;
+  }
 
-    &.blue {
-      background: #00A2FF;
-    }
+  .blue {
+    background: #00A2FF;
+  }
 
-    &.green {
-      background: #7BDF50;
-    }
+  .green {
+    background: #7BDF50;
+  }
 
-    &.blue-big {
-      width: 42rpx;
-      height: 42rpx;
-      background: url(https://img.icaixiaochu.com/5e70e5a555d2a.png) no-repeat #00A2FF;
-      background-size: 26rpx 26rpx;
-      background-position: 8rpx 8rpx;
-      box-shadow: 0 3rpx 10rpx rgba(0, 162, 255, 0.4);
-    }
+  .blue-big {
+    width: 42rpx;
+    height: 42rpx;
+    background: url(https://img.icaixiaochu.com/5e70e5a555d2a.png) no-repeat #00A2FF;
+    background-size: 26rpx 26rpx;
+    background-position: 8rpx 8rpx;
+    box-shadow: 0 3rpx 10rpx rgba(0, 162, 255, 0.4);
+  }
 
-    &.green-big {
-      width: 42rpx;
-      height: 42rpx;
-      background: url(https://img.icaixiaochu.com/5e70e67562d2c.png) no-repeat #7BDF50;
-      background-size: 30rpx 30rpx;
-      background-position: 6rpx 6rpx;
-      box-shadow: 0 3rpx 10rpx rgba(123, 223, 80, 0.4);
-    }
+  .green-big {
+    width: 42rpx;
+    height: 42rpx;
+    background: url(https://img.icaixiaochu.com/5e70e67562d2c.png) no-repeat #7BDF50;
+    background-size: 30rpx 30rpx;
+    background-position: 6rpx 6rpx;
+    box-shadow: 0 3rpx 10rpx rgba(123, 223, 80, 0.4);
+  }
 
-    &.err-big {
-      width: 42rpx;
-      height: 42rpx;
-      background: url(https://img.icaixiaochu.com/5e70e67562d2c.png) no-repeat rgba(253, 82, 0, 1);
-      background-size: 30rpx 30rpx;
-      background-position: 6rpx 6rpx;
-      box-shadow: 0 3rpx 10rpx rgba(253, 82, 0, 0.4);
-    }
+  .err-big {
+    width: 42rpx;
+    height: 42rpx;
+    background: url(https://img.icaixiaochu.com/5e70e67562d2c.png) no-repeat rgba(253, 82, 0, 1);
+    background-size: 30rpx 30rpx;
+    background-position: 6rpx 6rpx;
+    box-shadow: 0 3rpx 10rpx rgba(253, 82, 0, 0.4);
   }
 
   .line {
     height: 1rpx;
     background: rgba(225, 225, 225, 1);
+  }
 
-    &.line-yellow-blue {
-      height: 3rpx;
-      background: linear-gradient(to right, #F8CF2C, #00A2FF);
+  .line-yellow-blue {
+    height: 3rpx;
+    background: linear-gradient(to right, #F8CF2C, #00A2FF);
+  }
+
+  .line-blue-green {
+    height: 3rpx;
+    background: linear-gradient(to right, #00A2FF, #7BDF50);
+  }
+
+  .line-blue-error {
+    height: 3rpx;
+    background: linear-gradient(to right, #00A2FF, rgba(253, 82, 0, 1));
+  }
+
+  &.status-0 {
+
+    .circle-2 {
+
+      .blue-big;
+    }
+  }
+
+  &.status-1 {
+
+    .circle-2 {
+
+      .blue;
     }
 
-    &.line-blue-green {
-      height: 3rpx;
-      background: linear-gradient(to right, #00A2FF, #7BDF50);
+    .line-2 {
+
+      .line-blue-green;
     }
 
-    &.line-blue-error {
-      height: 3rpx;
-      background: linear-gradient(to right, #00A2FF, rgba(253, 82, 0, 1));
+    .circle-3 {
+
+      .green-big;
+    }
+  }
+
+  &.status-2 {
+
+    .circle-2 {
+
+      .blue;
+    }
+
+    .line-2 {
+
+      .line-blue-error;
+    }
+
+    .circle-3 {
+
+      .err-big;
+      background: url(https://img.icaixiaochu.com/5e722e7630640.png) no-repeat rgba(253, 82, 0, 1);
+      background-size: 24rpx 4rpx;
+      background-position: center;
+    }
+  }
+
+  &.status-3 {
+
+    .circle-2 {
+
+      .blue;
+    }
+
+    .line-2 {
+
+      .line-blue-error;
+    }
+
+    .circle-3 {
+
+      .err-big;
+      background: url(https://img.icaixiaochu.com/5e722f4b11551.png) no-repeat rgba(253, 82, 0, 1);
+      background-size: 18rpx 18rpx;
+      background-position: center;
     }
   }
 }
@@ -82,6 +150,13 @@
   margin-top: 25rpx;
   padding: 0 96rpx;
   box-sizing: border-box;
+
+  &.status-0 {
+
+    .item-3 {
+      opacity: 0;
+    }
+  }
 
   .item {
 
@@ -152,4 +227,16 @@
       }
     }
   }
+}
+
+.customer-service {
+  width: 100%;
+  height: 104rpx;
+  background: linear-gradient(to right, #e68135, #f3a242);
+  font-size: 35rpx;
+  color: #FFFFFF;
+  font-weight: bold;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }

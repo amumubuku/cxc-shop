@@ -2,14 +2,14 @@
   <div class="page-wrap dis-flex vertical flex-middle">
     <div class="notice dis-flex flex-middle">发起提现后将于审核通过后到账您的“微信账号”</div>
     <div class="body-wrap dis-flex vertical flex-middle">
-      <div class="money">66.00</div>
+      <div v-if="incomeStatisticsData" class="money">{{incomeStatisticsData.balance}}</div>
       <div class="input-wrap dis-flex vertical">
         <div class="input dis-flex flex-middle">
           <div class="money-icon">¥</div>
-          <input class="div-input dis-flex flex" type="number" placeholder="最低一元提">
-          <div class="input-text">全部</div>
+          <input v-model="money" placeholder-class="placeholder" class="div-input dis-flex flex" type="number" placeholder="最低一元提">
+          <div @click="inputAll" class="input-text">全部</div>
         </div>
-        <div class="btn dis-flex flex-middle flex-center">审核通过后到账，确认提现</div>
+        <div @click="applyWithdraw" class="btn dis-flex flex-middle flex-center">审核通过后到账，确认提现</div>
       </div>
       <div class="nav dis-flex flex-middle">
         <div @click="changeNav(index)" v-for="(item,index) in navList" :key="index" class="item dis-flex vertical flex-middle flex-center" :class="nowNavIndex == index && 'active'">
@@ -18,16 +18,17 @@
         </div>
       </div>
       <div class="list dis-flex vertical">
-        <div v-for="(item,index) in withdrawListData" :key="index" class="item dis-flex flex-middle flex-between">
+        <div @click="toWithdrawalDetail(item.id)" v-for="(item,index) in withdrawListData" :key="index" class="item dis-flex flex-middle flex-between">
           <div class="dis-flex vertical">
             <div class="item-num">{{item.money_arrive}}</div>
             <div class="item-time">{{item.created_at}}</div>
           </div>
           <div class="status dis-flex flex-middle">
-            <div class="status-title">{{item.statusStr}}</div>
+            <div class="status-title" :class="'status-' + item.status">{{item.statusStr}}</div>
             <div class="status-icon"></div>
           </div>
         </div>
+        <div v-if="withdrawListData.length == 0" class="no-list dis-flex flex-middle flex-center"></div>
       </div>
     </div>
   </div>
@@ -36,6 +37,17 @@
 export default {
   data () {
     return {
+      incomeStatisticsData: null,
+
+      // 是否达到最大页数
+      hasMax: false,
+
+      // 当前页数
+      page: 1,
+
+      // 提现金额
+      money: '',
+
       // 当前分类下表
       nowNavIndex: 0,
 
@@ -64,10 +76,90 @@ export default {
   },
 
   created () {
-    this.withdrawList(1)
+    this.withdrawList(this.page)
+    this.incomeStatistics()
+  },
+
+  onReachBottom () {
+    if (this.hasMax) {
+      return
+    }
+    this.page++
+    this.withdrawList(this.page)
   },
 
   methods: {
+
+    // 提现详情
+    toWithdrawalDetail (id) {
+      wx.navigateTo({
+        url: `../aaa/main?id=${id}`
+      })
+    },
+
+    // 检查提现金额
+    checkMoney () {
+      let errResult = ''
+
+      if (this.money === '') {
+        errResult = '未填写提现金额'
+      }
+
+      if (!errResult && this.money > this.incomeStatisticsData.balance) {
+        errResult = '提现金额超出余额'
+      }
+
+      if (!errResult && this.money < 2) {
+        errResult = '提现金额低于手续费'
+      }
+
+      return errResult
+    },
+
+    // 确认提现
+    async applyWithdraw () {
+      var error = this.checkMoney()
+      if (error) {
+        wx.showModal({
+          title: '提示',
+          content: error,
+          showCancel: false
+        })
+        return
+      }
+
+      wx.showModal({
+        title: '提示',
+        content: '请确认提现',
+        success: async (res) => {
+          if (res.confirm) {
+            try {
+              await this.$http.post('/applyWithdraw', {
+                money: this.money
+              })
+              this.incomeStatistics()
+            } catch (err) {
+              console.log('获取收益统计失败', err)
+            }
+          }
+        }
+      })
+    },
+
+    // 收益统计
+    async incomeStatistics () {
+      try {
+        let { data } = await this.$http.post('/incomeStatistics')
+        this.incomeStatisticsData = data
+      } catch (err) {
+        console.log('获取收益统计失败', err)
+      }
+    },
+
+    // 全部
+    inputAll () {
+      this.money = this.incomeStatisticsData.balance
+    },
 
     // 获取状态
     getStatus (status) {
@@ -89,9 +181,17 @@ export default {
       return str
     },
 
+    initList () {
+      this.hasMax = false
+      this.page = 1
+      this.withdrawListData = []
+    },
+
     // 修改导航栏
     changeNav (index) {
       this.nowNavIndex = index
+      this.initList()
+      this.withdrawList(this.page)
     },
 
     // 提现记录列表
@@ -101,6 +201,10 @@ export default {
           state: this.navList[this.nowNavIndex].state,
           page
         })
+
+        if (data.length === 0) {
+          this.hasMax = true
+        }
 
         data.forEach(item => {
           item.statusStr = this.getStatus(item.status)
@@ -117,6 +221,6 @@ export default {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
 @import "./style";
 </style>

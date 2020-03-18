@@ -2,7 +2,7 @@
   <div v-if="incomeStatisticsData" class="page-wrap dis-flex vertical flex-middle">
     <div class="money-title">可提现收益</div>
     <div class="money">{{incomeStatisticsData.balance}}</div>
-    <div class="money-btn">提现</div>
+    <div @click="toWithdrawal" class="money-btn"></div>
     <div class="data dis-flex flex-middle">
       <div class="item dis-flex vertical flex-middle flex">
         <div class="item-title">总收益</div>
@@ -37,6 +37,10 @@
           <div class="item-time">{{item.created_at}}</div>
         </div>
       </div>
+      <div v-if="incomeLogListData.length == 0" class="no-list"></div>
+    </div>
+    <div class="btn dis-flex flex-middle flex-center">
+      <button open-type="share"></button>
     </div>
   </div>
 </template>
@@ -44,17 +48,47 @@
 export default {
   data () {
     return {
+      // 是否达到最大页数
+      hasMax: false,
+
+      // 当前页数
+      page: 1,
       incomeLogListData: [],
       incomeStatisticsData: null
     }
   },
 
   created () {
-    this.incomeLogList(1)
+    this.incomeLogList(this.page)
     this.incomeStatistics()
   },
 
+  onReachBottom () {
+    if (this.hasMax) {
+      return
+    }
+    this.page++
+    this.incomeLogList(this.page)
+  },
+
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+    }
+    return {
+      title: '叮叮点外卖',
+      path: `pages/index/main?id=${wx.getStorageSync('userInfo').user_id}`
+    }
+  },
+
   methods: {
+
+    // 提现
+    toWithdrawal () {
+      wx.navigateTo({
+        url: `../withdrawal/main`
+      })
+    },
 
     // 收益统计
     async incomeStatistics () {
@@ -72,6 +106,10 @@ export default {
         let { data } = await this.$http.post('/incomeLogList', {
           page
         })
+
+        if (data.length === 0) {
+          this.hasMax = true
+        }
 
         this.incomeLogListData = [
           ...this.incomeLogListData,

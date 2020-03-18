@@ -32,24 +32,16 @@
     </div>
     <div class="list-wrap">
       <div class="list dis-flex vertical">
-        <div class="item dis-flex flex-middle">
-          <div class="sort">4</div>
+        <div v-if="index > 2" v-for="(item,index) in list" :key="index" class="item dis-flex flex-middle">
+          <div class="sort">{{index + 1}}</div>
           <div class="line-wrap dis-flex flex-middle flex-between flex">
             <div class="dis-flex flex-middle">
-              <div class="user-head"></div>
-              <div class="user-name">Hong</div>
+              <div class="user-head" :style="{
+                background: 'url(' + item.avatar_url + ')'
+              }"></div>
+              <div class="user-name">{{item.nick_name}}</div>
             </div>
-            <div class="item-money">73</div>
-          </div>
-        </div>
-        <div class="item dis-flex flex-middle">
-          <div class="sort">4</div>
-          <div class="line-wrap dis-flex flex-middle flex-between flex">
-            <div class="dis-flex flex-middle">
-              <div class="user-head"></div>
-              <div class="user-name">Hong</div>
-            </div>
-            <div class="item-money">73</div>
+            <div class="item-money">{{item.income}}</div>
           </div>
         </div>
       </div>
@@ -65,7 +57,9 @@
           <div class="money-des">我的收益</div>
         </div>
       </div>
-      <div class="btn">去邀请</div>
+      <div class="btn">
+        <button open-type="share"></button>
+      </div>
     </div>
   </div>
 </template>
@@ -81,6 +75,16 @@ export default {
 
   created () {
     this.rank()
+  },
+
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+    }
+    return {
+      title: '叮叮点外卖',
+      path: `pages/index/main?id=${wx.getStorageSync('userInfo').user_id}`
+    }
   },
 
   methods: {

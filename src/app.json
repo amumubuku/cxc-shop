@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/success/main",
     "pages/aaa/main",
     "pages/withdrawal/main",
     "pages/recording/main",

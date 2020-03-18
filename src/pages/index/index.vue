@@ -30,6 +30,19 @@
           </div>
         </div>
       </div>
+      <div class="distribution dis-flex flex-middle">
+        <div @click="toMyIncome" class="dis-flex vertical flex-middle flex">
+          <div class="distribution-money">0.00</div>
+          <div class="distribution-title">今日收益</div>
+        </div>
+        <div @click="toRank" class="dis-flex vertical flex-middle flex">
+          <div class="distribution-money">0.00</div>
+          <div class="distribution-title">收益排行</div>
+        </div>
+        <div class="dis-flex vertical flex-middle flex">
+
+        </div>
+      </div>
       <div class="good-shop">
         <title v-if="appInfo && appInfo.good_shop" :info="{'title': appInfo.good_shop.father,'des':appInfo.good_shop.son}" page="../hotshop/main" />
         <div class="optimal-shop">
@@ -116,7 +129,12 @@ export default {
     title,
     sortShop
   },
-  mounted () {
+  onLoad (option) {
+    if (option.id) {
+      this.bindParent(option.id)
+    }
+  },
+  mounted (option) {
     if (wx.getStorageSync('location')) {
       this.home()
       this.reverseGeocoder()
@@ -147,6 +165,33 @@ export default {
     })
   },
   methods: {
+
+    // 我的收入
+    toMyIncome () {
+      wx.navigateTo({
+        url: `../myIncome/main`
+      })
+    },
+
+    // 排行榜
+    toRank () {
+      wx.navigateTo({
+        url: `../rank/main`
+      })
+    },
+
+    // 绑定关系
+    async bindParent (id) {
+      console.log('触发')
+      try {
+        await this.$http.post('/bindParent', {
+          parent_id: id
+        })
+      } catch (err) {
+        console.log('绑定关系', err)
+      }
+    },
+
     opensetting (e) {
       this.authLocation = e.mp.detail.authSetting['scope.userLocation']
       if (this.authLocation) {
