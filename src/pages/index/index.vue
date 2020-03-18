@@ -30,16 +30,16 @@
           </div>
         </div>
       </div>
-      <div class="distribution dis-flex flex-middle">
-        <div @click="toMyIncome" class="dis-flex vertical flex-middle flex">
+      <div class="distribution dis-flex flex-middle flex-between">
+        <div @click="toMyIncome" class="dis-flex vertical flex-middle">
           <div class="distribution-money">0.00</div>
           <div class="distribution-title">今日收益</div>
         </div>
-        <div @click="toRank" class="dis-flex vertical flex-middle flex">
-          <div class="distribution-money">0.00</div>
+        <div @click="toRank" class="dis-flex vertical flex-middle">
+          <div class="distribution-rank-icon"></div>
           <div class="distribution-title">收益排行</div>
         </div>
-        <div class="dis-flex vertical flex-middle flex">
+        <div class="dis-flex vertical flex-middle item-a">
 
         </div>
       </div>
