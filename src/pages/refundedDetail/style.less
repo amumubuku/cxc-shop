@@ -1,0 +1,390 @@
+page {
+  background: #f4f4f4;
+}
+
+.refunded {
+  .notification {
+    height: 100px;
+    background: rgba(254, 168, 53, 0.7);
+    display: flex;
+    
+    justify-content: space-between;
+    padding: 0 14px;
+    padding-top: 20px;
+    box-sizing: border-box;
+
+    .not-row-left {
+      .top {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 20px;
+        color: rgba(255, 255, 255, 1);
+
+        img {
+          width: 14px;
+          height: 14px;
+          padding-right: 5px;
+        }
+      }
+
+      p {
+        font-size: 11px;
+
+        font-weight: 400;
+
+        color: rgba(255, 255, 255, 1);
+      }
+    }
+
+    .not-row-right {
+      width: 124px;
+      height: 30px;
+      border: 1px solid rgba(255, 255, 255, 1);
+      border-radius: 20px;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 21px;
+      color: rgba(255, 255, 255, 1);
+      text-align: center;
+      line-height: 30px;
+    }
+  }
+
+  .refunded-wrp {
+    position: relative;
+    top: -20px;
+    border-radius: 20px 20px 0 0;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    .refunded-head {
+      padding: 0 14px;
+      background-color: #fff;
+      margin-bottom: 7px;
+      border-bottom: 1px solid #F2F2F2;
+
+      .refunded-col {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 400;
+        line-height: 18px;
+        height: 45px;
+        
+
+        p {
+         
+          font-size:13px;
+        
+          font-weight:400;
+          line-height:18px;
+          color:rgba(120,120,120,1);
+     
+        }
+
+        span {
+          font-size:13px;
+          font-weight:400;
+          line-height:18px;
+          color:rgba(33,33,33,1);
+         
+        }
+      }
+    }
+    .refund-process {
+      margin: 21px 0;
+
+      .title {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 21px;
+        color: rgba(0, 0, 0, 0.87);
+        padding-bottom: 21px;
+        padding-left: 10px;
+      }
+
+      .refund-item {
+        height: 68px;
+        display: flex;
+        align-items: center;
+        // justify-content: space-between;
+        padding-left: 17px;
+        padding-bottom: 10px;
+
+        position: relative;
+
+        .process-state {
+          flex: 0 0 21px;
+          text-align: center;
+          line-height: 21px;
+          font-size: 14px;
+          font-weight: 400;
+          background: rgba(189, 189, 189, 1);
+          border-radius: 50%;
+          color: rgba(255, 255, 255, 1);
+          margin-right: 16px;
+          z-index: 1;
+        }
+
+        .state-1 {
+          background: rgba(254, 168, 53, 1);
+          box-shadow: 0px 1px 6px rgba(250, 177, 68, 0.5);
+        }
+
+        .state-2 {
+          background: rgba(38, 166, 255, 1);
+          box-shadow: 0px 1px 6px rgba(38, 166, 255, 0.5);
+        }
+
+        .state-3 {
+          background: rgba(245, 45, 60, 1);
+          box-shadow: 0px 1px 6px rgba(245, 45, 60, 0.5);
+        }
+
+        .state-4 {
+          background: rgba(72, 72, 72, 1);
+          box-shadow: 0px 1px 6px rgba(72, 72, 72, 0.5);
+        }
+
+        .line-bot {
+          position: absolute;
+          width: 1px;
+          height: 50%;
+          background: #bdbdbd;
+          top: 40px;
+          left: 27px;
+        }
+
+        .line {
+          position: absolute;
+          width: 1px;
+          height: 100%;
+          background: #bdbdbd;
+          top: 0px;
+          left: 27px;
+        }
+
+        .line-top {
+          position: absolute;
+          width: 1px;
+          height: 50%;
+          background: #bdbdbd;
+          top: 0px;
+          left: 27px;
+        }
+
+        .process-info {
+          flex: 1;
+          height: 68px;
+          background: rgba(255, 255, 255, 1);
+          border-radius: 10px;
+          display: flex;
+          flex-flow: column nowrap;
+          justify-content: space-between;
+          padding: 14px 0;
+          box-sizing: border-box;
+
+          .process-col-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            p {
+              font-size: 14px;
+              font-weight: 800;
+              color: rgba(0, 0, 0, 0.87);
+            }
+
+            .time {
+              width: 119px;
+              font-size: 11px;
+              font-weight: 400;
+              color: #A5A5A5;
+            }
+          }
+        }
+
+        .process-col-bot {
+          span {
+            font-size: 11px;
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.5);
+          }
+        }
+      }
+    }
+
+    .goods-wrp {
+      background: #fff;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      padding: 0 10px;
+
+      .goods-head {
+        height: 42px;
+        display: flex;
+        align-items: center;
+        border-top:1px solid #F2F2F2;
+
+        img {
+          width: 7px;
+          height: 7px;
+          padding-right: 5px;
+        }
+
+        p {
+          font-size: 13px;
+          font-weight: 400;
+          color: rgba(0, 0, 0, 0.87);
+        }
+      }
+
+      .goods-list {
+        padding: 16px 0;
+        .good-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 12px;
+          width: 347px;
+          height: 84px;
+          background: rgba(255, 255, 255, 1);
+          box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.08);
+          border-radius: 5px;
+          padding: 12px;
+          box-sizing: border-box;
+
+          .order-detail {
+            display: flex;
+            flex: 1;
+            padding-bottom: 4px;
+            align-items: center;
+
+            .good-cover {
+              width: 60px;
+              height: 60px;
+              border-radius: 5px;
+              background: rgba(190, 190, 190, 0.66);
+              margin-right: 12px;
+              overflow: hidden;
+
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+
+            .good-des {
+              display: flex;
+              flex-flow: column nowrap;
+              justify-content: space-between;
+              height: 50px;
+              padding: 2px 0;
+              box-sizing: border-box;
+
+              p {
+                font-size: 13px;
+                font-weight: 800;
+                color: #212121;
+              }
+
+              .num {
+                font-size: 11px;
+                font-weight: 400;
+                color: #A5A5A5;
+              }
+            }
+          }
+
+          .good-price {
+            flex: 0 0 56px;
+            height: 100%;
+            font-size: 15px;
+            font-weight: bold;
+            color: #FD5200;
+            text-align: end;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+          }
+        }
+
+        .good-item:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .fee-box {
+        height: 41px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 18px;
+        .row-text1 {
+          color: rgba(0, 0, 0, 0.87);
+        }
+
+        .row-text2 {
+          color: rgba(0, 0, 0, 0.6);
+        }
+      }
+    }
+
+    .select-goods {
+      height: 41px;
+      background: rgba(255, 255, 255, 1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+
+      .all-select {
+        display: flex;
+        align-items: center;
+
+        .circle {
+          width: 19px;
+          height: 19px;
+          background: rgba(255, 255, 255, 1);
+          border: 1px solid rgba(112, 112, 112, 0.45);
+          border-radius: 50%;
+        }
+
+        img {
+          width: 24px;
+          height: 24px;
+          position: relative;
+          top: 3px;
+          left: -1px;
+        }
+
+        .title {
+          padding-left: 6px;
+        }
+      }
+
+      .price-wrp {
+        display: flex;
+        align-items: center;
+        font-size: 17px;
+        font-weight: 400;
+
+        p {
+          color: #000000;
+          padding-right: 6px;
+        }
+
+        div {
+          display: flex;
+          align-items: baseline;
+          color: #f52d3c;
+        }
+      }
+    }
+  }
+}

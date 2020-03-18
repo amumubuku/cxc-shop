@@ -1,0 +1,262 @@
+.shop {
+  .shop-list {
+    .shop-item {
+      padding: 0 14px;
+      border-bottom: 1px solid #F2F2F2;
+
+      .top {
+        height: 137px;
+        display: flex;
+        justify-content: space-between;
+
+        .shop-cover {
+          margin-top: 20px;
+          flex: 0 0 73px;
+          height: 73px;
+          background: #aeaeae;
+          border-radius: 5px;
+
+          img {
+            height: 73px;
+            width: 100%;
+          }
+        }
+
+        .shop-info {
+          height: 100%;
+          padding: 20px 14px;
+          padding-right: 0;
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          box-sizing: border-box;
+
+          .shop-des {
+            height: 100%;
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+            align-content: space-between;
+
+            .shop-name {
+              font-size: 17px;
+              font-weight: bold;
+              color: rgba(33, 33, 33, 1);
+            }
+
+            .shop-rate {
+              display: flex;
+
+              .rate-list {
+                display: flex;
+                align-items: center;
+                margin-right: 3px;
+
+                img {
+                  margin-right: 2px;
+                  height: 12px;
+                  width: 12px;
+                }
+              }
+
+              p {
+                font-size: 13px;
+                font-weight: 400;
+                color: rgba(120, 120, 120, 1);
+              }
+            }
+
+            .fee-des {
+              font-size: 13px;
+              font-weight: 400;
+              color: rgba(120, 120, 120, 1);
+            }
+
+            .shop-tag-list {
+              display: flex;
+
+              .tag-item {
+                margin-right: 4px;
+                padding: 0 4px;
+                width: 35px;
+                height: 16px;
+                background: rgba(255, 255, 255, 1);
+                border: 1px solid rgba(250, 123, 93, 0.5019607843137255);
+                font-size: 11px;
+                font-weight: 500;
+                line-height: 16px;
+                color: rgba(250, 123, 93, 1);
+                border-radius: 5px;
+                text-align: center;
+              }
+            }
+
+          }
+
+          .fee-time {
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: center;
+            justify-content: center;
+
+            p {
+              font-size: 13px;
+              font-weight: 400;
+              line-height: 18px;
+              color: rgba(120, 120, 120, 1);
+
+            }
+
+            .btn {
+              width: 64px;
+              height: 27px;
+              background: linear-gradient(90deg, rgba(244, 186, 28, 1) 0%, rgba(255, 159, 30, 1) 100%);
+              box-shadow: 0px 1px 6px rgba(255, 159, 30, 0.5);
+              border-radius: 14px;
+              font-size: 15px;
+              font-weight: 400;
+              line-height: 27px;
+              text-align: center;
+              color: rgba(255, 255, 255, 1);
+              margin-bottom: 9px;
+            }
+          }
+        }
+      }
+
+      .foods {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .food-item {
+          display: flex;
+          flex-flow: column nowrap;
+          align-items: center;
+
+          .food-img {
+            width: 109px;
+            height: 109px;
+            background: rgba(233, 233, 233, 1);
+            border-radius: 5px;
+
+
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+
+          .food-name {
+            padding-top: 8px;
+            height: 18px;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 18px;
+            color: rgba(33, 33, 33, 1);
+          }
+
+          .food-price {
+            height: 21px;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 21px;
+            color: rgba(253, 82, 0, 1);
+          }
+
+        }
+      }
+
+      .hot-shop-tag {
+        padding: 25px 0;
+
+        .top-tag {
+          display: flex;
+          align-items: center;
+
+          .hot-icon {
+            width: 80px;
+            height: 26px;
+            background: rgba(253, 82, 0, 1);
+            border-radius: 5px 5px 10px 5px;
+            display: flex;
+            align-items: center;
+
+            img {
+              width: 12px;
+              height: 12px;
+              padding: 0 4px;
+            }
+
+            p {
+              font-size: 13px;
+              font-weight: 400;
+              line-height: 18px;
+              color: rgba(255, 255, 255, 1);
+            }
+
+          }
+
+          .hot-title {
+            position: relative;
+            left: -7px;
+            width: 125px;
+            height: 26px;
+            background: rgba(253, 82, 0, .1);
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 26px;
+            color: rgba(253, 82, 0, 1);
+            text-align: center;
+
+          }
+
+        }
+
+        .comment {
+          display: flex;
+          justify-content: center;
+          padding-top: 8px;
+          .flex-left {
+            flex: 0 0 80px;
+            height: 26px;
+            border: 1px solid rgba(201, 201, 201, 1);
+            border-radius: 5px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+              width: 14px;
+              height: 14px;
+              margin-right: 4px;
+
+            }
+
+            span {
+              font-size: 13px;
+              font-weight: 400;
+              color: rgba(33, 33, 33, 1);
+            }
+
+          }
+
+          .flex-right {
+            flex: 1;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 18px;
+            color: rgba(120, 120, 120, 1);
+          }
+
+        }
+
+
+      }
+    }
+
+
+  }
+}

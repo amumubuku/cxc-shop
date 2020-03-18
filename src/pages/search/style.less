@@ -1,0 +1,165 @@
+.search {
+  padding: 0 14px;
+  .search-box {
+    padding: 0 10px;
+    height: 32px;
+    background: #f6f6f6;
+    border-radius: 32px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0px;
+    width: calc(100% - 28px);
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 0 auto;
+    img {
+      height: 14px;
+      width: 14px;
+      margin-right: 6px;
+    }
+    input {
+      flex: 1;
+      height: 100%;
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 16px;
+      color: #ACACAC;
+    }
+  }
+  .search-wrp {
+    padding-top: 38px;
+    .search-hitory,
+    .search-hot {
+      .head-title {
+        height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        p {
+          width: 52px;
+          height: 18px;
+          font-size: 13px;
+          font-weight: 400;
+          line-height: 18px;
+          color: rgba(120, 120, 120, 1);
+        }
+        img {
+          width: 13px;
+          height: 15px;
+        }
+      }
+      .search-list {
+        display: flex;
+        align-items: center;
+        flex-flow: row wrap;
+        .item {
+          font-size: 13px;
+          font-weight: 400;
+          color: rgba(33, 33, 33, 1);
+          padding: 8px 14px;
+          background: #f2f2f2;
+          margin-right: 10px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+  .search-results {
+    position: fixed;
+    top: 38px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 98;
+    background: #fff;
+    .search-shop-wrp {
+      .search-shop-shop-null {
+       height: 380px;
+        background: #fff;
+        .content-wrp {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-flow: column nowrap;
+          width: 100%;
+          height: 100%;
+    
+          .icon {
+            width: 100px;
+            height: 115px;
+            border-radius: 50%;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          p {
+            margin-top: 4px;
+            height: 21px;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 21px;
+            color: rgba(33, 33, 33, 1);
+          }
+        }
+      }
+
+    }
+   
+    .recommend-shop {
+     
+      .title {
+        height: 49px;
+        background: rgba(248, 248, 248, 1);
+        font-size: 15px;
+        font-weight: bold;
+        line-height: 49px;
+        color: rgba(33, 33, 33, 1);
+        text-align: center;
+
+      }
+    }
+  }
+  .search-shop--food-null {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 38px;
+    bottom: 0;
+    z-index: 99;
+    .content-wrp {
+      position: relative;
+      top: -120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-flow: column nowrap;
+      width: 100%;
+      height: 100%;
+
+      .icon {
+        width: 180px;
+        height: 180px;
+        width: 180px;
+        height: 180px;
+        background: rgba(214, 214, 214, 1);
+        border-radius: 50%;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      p {
+        margin-top: 20px;
+        width: 105px;
+        height: 21px;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 21px;
+        color: rgba(33, 33, 33, 1);
+      }
+    }
+  }
+}

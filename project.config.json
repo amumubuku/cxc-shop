@@ -1,0 +1,125 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"miniprogramRoot": "dist/wx/",
+	"compileType": "miniprogram",
+	"appid": "wxad31366545b6d8ef",
+	"projectname": "shop",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"libVersion": "2.9.4",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 9,
+			"list": [
+				{
+					"id": 0,
+					"name": "pages/test/main",
+					"pathName": "pages/test/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "shop",
+					"pathName": "pages/shop/main",
+					"query": "shopId=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "index",
+					"pathName": "pages/index/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/my/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单",
+					"pathName": "pages/order/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "收货地址",
+					"pathName": "pages/myaddress/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "优惠劵",
+					"pathName": "pages/mycoupon/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "pages/invalidCoupon/main",
+					"pathName": "pages/invalidCoupon/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "优选商家",
+					"pathName": "pages/hotshop/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提交订单",
+					"pathName": "pages/submitOrder/main",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

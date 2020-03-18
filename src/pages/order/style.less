@@ -1,0 +1,292 @@
+page {
+  background: #f6f6f6;
+}
+
+.order {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  .nav {
+    position: fixed;
+    width: 100%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 27;
+    background: #f6f6f6;
+
+    .nav-item {
+      height: 100%;
+      padding-top: 14px;
+      flex: 1;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      position: relative;
+
+      p {
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 18px;
+        color: rgba(120, 120, 120, 1);
+      }
+
+      .tag {
+        width: 27px;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          rgba(244, 186, 28, 1) 0%,
+          rgba(255, 159, 30, 1) 100%
+        );
+        border-radius: 2px 2px 0px 0px;
+      }
+
+      .active {
+        font-size: 13px;
+        font-weight: bold;
+        color: rgba(33, 33, 33, 1);
+      }
+    }
+  }
+
+  .order-wrp {
+    position: fixed;
+    bottom: 0;
+    top: 45px;
+    overflow: scroll;
+    width: 100%;
+    .order-list {
+      background: #fff;
+      border-radius: 20px 20px 0 0;
+      overflow: hidden;
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .shop-cover {
+          flex: 0 0 34px;
+          height: 34px;
+          border-radius: 5px;
+          background: #ccc;
+          margin: 0 14px;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .guide-right {
+          padding-right: 14px;
+          height: 55px;
+          border-bottom: 1px solid #f2f2f2;
+          flex: 1;
+          display: flex;
+          align-items: center;
+
+          .shop-msg {
+            max-width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .shop-name {
+              font-size: 15px;
+              font-weight: 800;
+              color: rgba(0, 0, 0, 1);
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+              padding-right: 8px;
+            }
+
+            .shop-icon {
+              width: 12px;
+              height: 12px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+          }
+
+          .order-state {
+            flex: 1;
+            text-align: end;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 18px;
+            color: rgba(30, 135, 255, 1);
+          }
+        }
+      }
+
+      .order-item {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+        border-bottom: 1px solid #f2f2f2;
+
+        .order-foods {
+          padding: 6px 14px 6px 62px;
+
+          .food-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+          }
+
+          .food-name {
+            font-size: 11px;
+
+            font-weight: 400;
+            line-height: 16px;
+            color: rgba(120, 120, 120, 1);
+          }
+
+          .food-num {
+            font-size: 11px;
+            font-weight: 400;
+            line-height: 16px;
+            color: rgba(120, 120, 120, 1);
+          }
+        }
+
+        .footer {
+          height: 72px;
+          display: flex;
+          flex-flow: column nowrap;
+          justify-content: space-between;
+          align-items: flex-end;
+          padding-right: 14px;
+          padding: 18px 14px 18px 0;
+
+          p {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 18px;
+            color: rgba(33, 33, 33, 1);
+          }
+
+          .order-btn-area {
+            display: flex;
+            align-items: center;
+
+            .btn {
+              width: 86px;
+              height: 34px;
+              border: 2px solid rgba(120, 120, 120, 0.2);
+              border-radius: 5px;
+              font-size: 13px;
+              font-weight: 500;
+              line-height: 34px;
+              color: rgba(120, 120, 120, 1);
+              text-align: center;
+              margin-right: 10px;
+            }
+
+            .order-botton {
+              width: 86px;
+              height: 34px;
+              background: linear-gradient(
+                90deg,
+                rgba(244, 186, 28, 1) 0%,
+                rgba(255, 159, 30, 1) 100%
+              );
+              box-shadow: 0px 1px 6px rgba(255, 159, 30, 0.4);
+              border-radius: 5px;
+              font-size: 13px;
+              font-weight: 500;
+              line-height: 34px;
+              color: #fff;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+    .orderNull {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      border-radius: 20px 20px 0px 0px;
+      .content-wrp {
+        padding-top: 149px;
+        display: flex;
+        align-items: center;
+        flex-flow: column nowrap;
+        .icon {
+          width: 175px;
+          height: 127px;
+          opacity: 1;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        p {
+          font-size: 15px;
+          font-weight: 400;
+          line-height: 21px;
+          color: rgba(33, 33, 33, 1);
+        }
+      }
+     
+    }
+  }
+  .login-wrp {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    background: #fff;
+    z-index: 998;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    .login-icon {
+      width: 136px;
+      height: 102px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    p {
+      font-size: 15px;
+      font-weight: 400;
+      color: rgba(33, 33, 33, 1);
+      padding: 26px 0;
+    }
+    .login-btn {
+      width: 146px;
+      height: 46px;
+      background: linear-gradient(
+        90deg,
+        rgba(244, 186, 28, 1) 0%,
+        rgba(255, 159, 30, 1) 100%
+      );
+      box-shadow: 0px 1px 6px rgba(255, 159, 30, 0.5);
+      border-radius: 25px;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 46px;
+      color: rgba(255, 255, 255, 1);
+      text-align: center;
+    }
+  }
+}
