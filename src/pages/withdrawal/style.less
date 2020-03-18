@@ -1,0 +1,165 @@
+.page-wrap {
+  width: 100%;
+  min-height: 100vh;
+  background: rgba(248, 248, 248, 1);
+}
+
+.notice {
+  width: 100%;
+  height: 80rpx;
+  background: rgba(249, 239, 204, 1);
+  font-size: 23rpx;
+  color: rgba(253, 82, 0, 1);
+  padding: 0 36rpx;
+  box-sizing: border-box;
+
+  &::before {
+    content: '*';
+  }
+}
+
+.body-wrap {
+  width: 100%;
+  padding: 0 36rpx;
+  box-sizing: border-box;
+  padding-top: 58rpx;
+  box-sizing: border-box;
+}
+
+.money {
+  font-size: 69rpx;
+  color: rgba(63, 67, 66, 1);
+  font-weight: bold;
+}
+
+.input-wrap {
+  width: 100%;
+  border-radius: 10rpx;
+  background: rgba(255, 255, 255, 1);
+  padding: 0 16rpx;
+  box-sizing: border-box;
+  margin-top: 74rpx;
+  box-shadow: 0 5rpx 30rpx rgba(0, 0, 0, 0.06);
+
+  .input {
+    width: 100%;
+    padding: 46rpx 16rpx 30rpx;
+    box-sizing: border-box;
+
+    .money-icon {
+      font-size: 37rpx;
+      font-weight: bold;
+      color: rgba(63, 67, 66, 1);
+    }
+
+    .div-input {
+      padding-left: 17rpx;
+      box-sizing: border-box;
+    }
+
+    .input-text {
+      font-size: 29rpx;
+      color: rgba(253, 82, 0, 1);
+    }
+  }
+
+  .btn {
+    width: 100%;
+    height: 123rpx;
+    background: url(https://img.icaixiaochu.com/5e70bcb6af14a.png);
+    background-size: cover;
+    color: #fff;
+    font-size: 27rpx;
+    font-weight: 500;
+  }
+}
+
+.nav {
+  width: 100%;
+  height: 60rpx;
+  margin-top: 38rpx;
+
+  .item {
+    height: 100%;
+    padding: 0 34rpx;
+    box-sizing: border-box;
+    font-size: 21rpx;
+    color: rgba(148, 148, 148, 1);
+    position: relative;
+    top: 0;
+    left: 0;
+
+    .item-block {
+      width: 26rpx;
+      height: 6rpx;
+      background: transparent;
+      border-radius: 3rpx;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &.active {
+      background: #fff;
+      border-radius: 10rpx 10rpx 0 0;
+
+      .item-block {
+        background: rgba(253, 177, 0, 1);
+      }
+    }
+  }
+}
+
+.list {
+  width: 100%;
+  border-radius: 0 10rpx 10rpx 10rpx;
+  background: #fff;
+  padding-left: 46rpx;
+  box-sizing: border-box;
+
+
+  .item {
+    width: 100%;
+    padding: 30rpx 22rpx 30rpx 0rpx;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(225, 225, 225, 1);
+
+    &:nth-of-type(1) {
+      border-top: none;
+    }
+
+    .item-num {
+      font-size: 33rpx;
+      color: rgba(253, 82, 0, 1);
+      font-weight: bold;
+
+      &::before {
+        content: '提现金额';
+        font-size: 29rpx;
+        color: rgba(50, 50, 50, 1);
+        font-weight: bold;
+        margin-right: 8rpx;
+      }
+    }
+
+    .item-time {
+      font-size: 21rpx;
+      color: rgba(148, 148, 148, 1);
+      margin-top: 6rpx;
+    }
+
+    .status-title {
+      font-size: 25rpx;
+      font-weight: bold;
+    }
+
+    .status-icon {
+      width: 18rpx;
+      height: 18rpx;
+      background: url(https://img.icaixiaochu.com/5e70bd4a56f66.png);
+      background-size: cover;
+      margin-left: 10rpx;
+    }
+  }
+}

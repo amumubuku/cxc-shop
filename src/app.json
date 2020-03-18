@@ -1,5 +1,10 @@
 {
   "pages": [
+    "pages/aaa/main",
+    "pages/withdrawal/main",
+    "pages/recording/main",
+    "pages/myIncome/main",
+    "pages/rank/main",
     "pages/index/main",
     "pages/order/main",
     "pages/my/main",
@@ -62,5 +67,5 @@
     }
   },
   "debug": false
-  
+
 }

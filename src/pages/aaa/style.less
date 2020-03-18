@@ -1,0 +1,155 @@
+.page-wrap {
+  width: 100%;
+  min-height: 100vh;
+  background: #F8F8F8;
+}
+
+.step {
+  width: 100%;
+  padding: 0 126rpx 0 137rpx;
+  box-sizing: border-box;
+  margin-top: 78rpx;
+
+  .circle {
+    width: 20rpx;
+    height: 20rpx;
+    background: rgba(225, 225, 225, 1);
+    border-radius: 50%;
+
+    &.yellow {
+      background: #F8CF2C;
+    }
+
+    &.blue {
+      background: #00A2FF;
+    }
+
+    &.green {
+      background: #7BDF50;
+    }
+
+    &.blue-big {
+      width: 42rpx;
+      height: 42rpx;
+      background: url(https://img.icaixiaochu.com/5e70e5a555d2a.png) no-repeat #00A2FF;
+      background-size: 26rpx 26rpx;
+      background-position: 8rpx 8rpx;
+      box-shadow: 0 3rpx 10rpx rgba(0, 162, 255, 0.4);
+    }
+
+    &.green-big {
+      width: 42rpx;
+      height: 42rpx;
+      background: url(https://img.icaixiaochu.com/5e70e67562d2c.png) no-repeat #7BDF50;
+      background-size: 30rpx 30rpx;
+      background-position: 6rpx 6rpx;
+      box-shadow: 0 3rpx 10rpx rgba(123, 223, 80, 0.4);
+    }
+
+    &.err-big {
+      width: 42rpx;
+      height: 42rpx;
+      background: url(https://img.icaixiaochu.com/5e70e67562d2c.png) no-repeat rgba(253, 82, 0, 1);
+      background-size: 30rpx 30rpx;
+      background-position: 6rpx 6rpx;
+      box-shadow: 0 3rpx 10rpx rgba(253, 82, 0, 0.4);
+    }
+  }
+
+  .line {
+    height: 1rpx;
+    background: rgba(225, 225, 225, 1);
+
+    &.line-yellow-blue {
+      height: 3rpx;
+      background: linear-gradient(to right, #F8CF2C, #00A2FF);
+    }
+
+    &.line-blue-green {
+      height: 3rpx;
+      background: linear-gradient(to right, #00A2FF, #7BDF50);
+    }
+
+    &.line-blue-error {
+      height: 3rpx;
+      background: linear-gradient(to right, #00A2FF, rgba(253, 82, 0, 1));
+    }
+  }
+}
+
+.status {
+  width: 100%;
+  margin-top: 25rpx;
+  padding: 0 96rpx;
+  box-sizing: border-box;
+
+  .item {
+
+    &.active {
+
+      .item-title {
+        font-weight: bold;
+      }
+    }
+
+    .item-title {
+      font-size: 21rpx;
+      color: #3F4342;
+      margin-bottom: 4rpx;
+      font-weight: 300;
+    }
+
+    .item-time {
+      font-size: 19rpx;
+      color: #C2C2C2;
+    }
+  }
+}
+
+.data-wrap {
+  width: 100%;
+  border-radius: 30rpx 30rpx 0 0;
+  background: #fff;
+  margin-top: 44rpx;
+
+  .data-title  {
+    font-size: 25rpx;
+    color: #3F4342;
+    margin-top: 41rpx;
+  }
+
+  .data-money {
+    font-size: 69rpx;
+    color: #FD5200;
+    font-weight: bold;
+    margin-top: 18rpx;
+  }
+
+  .list {
+    width: 100%;
+    padding-left: 44rpx;
+    box-sizing: border-box;
+
+    .item {
+      width: 100%;
+      padding: 25rpx 44rpx 25rpx 0;
+      box-sizing: border-box;
+      border-top: 1px solid #E1E1E1;
+
+      &:nth-of-type(1) {
+        border-top: none;
+      }
+
+      .item-des {
+        font-size: 25rpx;
+        color: #949494;
+      }
+
+      .item-data {
+        font-size: 25rpx;
+        color: #3F4342;
+        font-weight: bold;
+      }
+    }
+  }
+}
