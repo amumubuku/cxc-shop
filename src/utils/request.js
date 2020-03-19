@@ -9,7 +9,7 @@ function request (url, method, data = {}, header = {}) {
     let token = wx.getStorageSync('token') || ''
     let location = wx.getStorageSync('location') || {}
     let params = Object.assign(data, {
-      token,
+      token: 'oAHSX5E3AbF7oe4joxiKClx499do' || token,
       lat: location.latitude || 0,
       lng: location.longitude || 0
     })

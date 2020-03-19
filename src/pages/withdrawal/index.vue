@@ -75,7 +75,7 @@ export default {
     }
   },
 
-  created () {
+  onLoad () {
     this.withdrawList(this.page)
     this.incomeStatistics()
   },
@@ -90,10 +90,17 @@ export default {
 
   methods: {
 
+    // 提现成功
+    toSuccess (id) {
+      wx.redirectTo({
+        url: `../success/main`
+      })
+    },
+
     // 提现详情
     toWithdrawalDetail (id) {
       wx.navigateTo({
-        url: `../aaa/main?id=${id}`
+        url: `../withdrawalDetail/main?id=${id}`
       })
     },
 
@@ -105,11 +112,11 @@ export default {
         errResult = '未填写提现金额'
       }
 
-      if (!errResult && this.money > this.incomeStatisticsData.balance) {
+      if (!errResult && parseFloat(this.money) > parseFloat(this.incomeStatisticsData.balance)) {
         errResult = '提现金额超出余额'
       }
 
-      if (!errResult && this.money < 2) {
+      if (!errResult && parseFloat(this.money) < 2) {
         errResult = '提现金额低于手续费'
       }
 
@@ -138,6 +145,7 @@ export default {
                 money: this.money
               })
               this.incomeStatistics()
+              this.toSuccess()
             } catch (err) {
               console.log('获取收益统计失败', err)
             }

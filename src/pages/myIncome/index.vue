@@ -23,7 +23,7 @@
       </div>
       <div class="income-wrap dis-flex flex-middle flex-between">
         <div class="dis-flex flex-middle">
-          <div class="income-des">可体现收益（元）</div>
+          <div class="income-des">可提现收益（元）</div>
           <div class="income-num">{{incomeStatisticsData.balance}}</div>
         </div>
         <div @click="toWithdrawal" class="income-btn dis-flex flex-middle">
@@ -75,7 +75,7 @@
       </div>
       <div v-for="(item,index) in childRankData" :key="index" class="item dis-flex flex-middle flex-between">
         <div class="dis-flex flex-middle">
-          <div class="item-icon" :class="'item-icon-' + index">{{index > 2 ? index : ''}}</div>
+          <div class="item-icon dis-flex flex-middle-center" :class="'item-icon-' + index">{{index > 2 ? index : ''}}</div>
           <div class="item-img" :style="{
             background: 'url(' + item.avatar_url + ')'
           }"></div>
@@ -111,10 +111,14 @@ export default {
     }
   },
 
-  created () {
+  onLoad () {
     this.incomeStatistics()
     this.rank()
     this.childRank(this.page)
+  },
+
+  onShow () {
+    this.incomeStatistics()
   },
 
   onShareAppMessage: function (res) {
@@ -122,7 +126,7 @@ export default {
       // 来自页面内转发按钮
     }
     return {
-      title: '叮叮点外卖',
+      title: `叮叮点外卖 用户id:${wx.getStorageSync('userInfo').user_id}`,
       path: `pages/index/main?id=${wx.getStorageSync('userInfo').user_id}`
     }
   },

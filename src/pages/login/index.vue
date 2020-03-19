@@ -21,6 +21,22 @@ export default {
     }
   },
   methods: {
+    // 绑定关系
+    async bindParent (id) {
+      wx.showModal({
+        title: '绑定id',
+        content: '' + id,
+        showCancel: false
+      })
+      try {
+        await this.$http.post('/bindParent', {
+          parent_id: id
+        })
+      } catch (err) {
+        console.log('绑定关系', err)
+      }
+    },
+
     getUserInfo (e) {
       if (e.mp.detail) {
         let { encryptedData, iv } = e.mp.detail
@@ -28,6 +44,11 @@ export default {
           success: (result) => {
             user.loginByWeixin(iv, encryptedData, this.code).then(res => {
               this.setUser(res.user)
+              let id = wx.getStorageSync('parent_id')
+              if (id) {
+                console.log(id)
+                this.bindParent(id)
+              }
               wx.navigateBack({ changed: true })
             })
           },

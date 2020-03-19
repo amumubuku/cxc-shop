@@ -30,18 +30,16 @@
           </div>
         </div>
       </div>
-      <div class="distribution dis-flex flex-middle flex-between">
-        <div @click="toMyIncome" class="dis-flex vertical flex-middle">
-          <div class="distribution-money">0.00</div>
+      <div v-if="incomeStatisticsData" class="distribution dis-flex flex-middle flex-between">
+        <div class="dis-flex vertical flex-middle">
+          <div class="distribution-money">{{incomeStatisticsData.today_income}}</div>
           <div class="distribution-title">今日收益</div>
         </div>
         <div @click="toRank" class="dis-flex vertical flex-middle">
           <div class="distribution-rank-icon"></div>
           <div class="distribution-title">收益排行</div>
         </div>
-        <div class="dis-flex vertical flex-middle item-a">
-
-        </div>
+        <div @click="toMyIncome" class="dis-flex vertical flex-middle item-a"></div>
       </div>
       <div class="good-shop">
         <title v-if="appInfo && appInfo.good_shop" :info="{'title': appInfo.good_shop.father,'des':appInfo.good_shop.son}" page="../hotshop/main" />
@@ -118,7 +116,9 @@ export default {
       hotShop: [],
       shoplist: [],
       authLocation: true,
-      appInfo: ''
+      appInfo: '',
+      incomeStatisticsData: null,
+      parentId: null
     }
   },
   computed: {
@@ -131,7 +131,19 @@ export default {
   },
   onLoad (option) {
     if (option.id) {
-      this.bindParent(option.id)
+      this.parentId = option.id
+    }
+  },
+  onShow () {
+    if (wx.getStorageSync('userInfo') && wx.getStorageSync('userInfo').user_id) {
+      if (this.parentId) {
+        this.bindParent(this.parentId)
+      }
+      this.incomeStatistics()
+    } else {
+      if (this.parentId) {
+        wx.setStorageSync('parent_id', this.parentId)
+      }
     }
   },
   mounted (option) {
@@ -166,6 +178,16 @@ export default {
   },
   methods: {
 
+    // 收益统计
+    async incomeStatistics () {
+      try {
+        let { data } = await this.$http.post('/incomeStatistics')
+        this.incomeStatisticsData = data
+      } catch (err) {
+        console.log('获取收益统计失败', err)
+      }
+    },
+
     // 我的收入
     toMyIncome () {
       wx.navigateTo({
@@ -182,7 +204,11 @@ export default {
 
     // 绑定关系
     async bindParent (id) {
-      console.log('触发')
+      wx.showModal({
+        title: '绑定id',
+        content: '' + id,
+        showCancel: false
+      })
       try {
         await this.$http.post('/bindParent', {
           parent_id: id

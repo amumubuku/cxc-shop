@@ -1,12 +1,12 @@
 {
   "pages": [
+    "pages/index/main",
     "pages/success/main",
-    "pages/aaa/main",
+    "pages/withdrawalDetail/main",
     "pages/withdrawal/main",
     "pages/recording/main",
     "pages/myIncome/main",
     "pages/rank/main",
-    "pages/index/main",
     "pages/order/main",
     "pages/my/main",
     "pages/orderdetail/main",

@@ -58,7 +58,7 @@ export default {
     }
   },
 
-  created () {
+  onLoad () {
     this.incomeLogList(this.page)
     this.incomeStatistics()
   },
@@ -76,7 +76,7 @@ export default {
       // 来自页面内转发按钮
     }
     return {
-      title: '叮叮点外卖',
+      title: `叮叮点外卖 用户id:${wx.getStorageSync('userInfo').user_id}`,
       path: `pages/index/main?id=${wx.getStorageSync('userInfo').user_id}`
     }
   },
