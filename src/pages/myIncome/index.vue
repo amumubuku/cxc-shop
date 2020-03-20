@@ -41,7 +41,7 @@
         <div class="right-icon"></div>
       </div>
       <div class="rank dis-flex">
-        <div class="item dis-flex vertical flex-middle flex item-2">
+        <div v-if="rankData[1]" class="item dis-flex vertical flex-middle flex item-2">
           <div class="item-img-icon"></div>
           <div class="item-img" :style="{
             background: 'url(' + rankData[1].avatar_url + ')'
@@ -49,7 +49,7 @@
           <div class="item-name">{{rankData[1].nick_name}}</div>
           <div class="money">{{rankData[1].income}}</div>
         </div>
-        <div class="item dis-flex vertical flex-middle flex item-1">
+        <div v-if="rankData[0]" class="item dis-flex vertical flex-middle flex item-1">
           <div class="item-img-icon"></div>
           <div class="item-img" :style="{
             background: 'url(' + rankData[0].avatar_url + ')'
@@ -57,7 +57,7 @@
           <div class="item-name">{{rankData[0].nick_name}}</div>
           <div class="money">{{rankData[0].income}}</div>
         </div>
-        <div class="item dis-flex vertical flex-middle flex item-3">
+        <div v-if="rankData[2]" class="item dis-flex vertical flex-middle flex item-3">
           <div class="item-img-icon"></div>
           <div class="item-img" :style="{
             background: 'url(' + rankData[2].avatar_url + ')'
@@ -107,7 +107,10 @@ export default {
       page: 1,
       incomeStatisticsData: null,
       rankData: null,
-      childRankData: []
+      childRankData: [],
+
+      // 是否请求中
+      hasRequesting: false
     }
   },
 
@@ -180,7 +183,12 @@ export default {
 
     // 下级人员
     async childRank (page) {
+      if (this.hasRequesting) {
+        return
+      }
+
       try {
+        this.hasRequesting = true
         let { data } = await this.$http.post('/childRank', {
           page
         })
@@ -195,6 +203,8 @@ export default {
         ]
       } catch (err) {
         console.log('获取下级人员失败', err)
+      } finally {
+        this.hasRequesting = false
       }
     }
   }
