@@ -204,11 +204,6 @@ export default {
 
     // 绑定关系
     async bindParent (id) {
-      wx.showModal({
-        title: '绑定id',
-        content: '' + id,
-        showCancel: false
-      })
       try {
         await this.$http.post('/bindParent', {
           parent_id: id
