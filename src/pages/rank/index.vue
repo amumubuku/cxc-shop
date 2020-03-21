@@ -1,8 +1,8 @@
 <template>
   <div class="page-wrap dis-flex vertical flex-middle">
-    <div class="time-wrap dis-flex flex-middle">
+    <div v-if="time" class="time-wrap dis-flex flex-middle">
       <div class="time-des">距离本周结束还剩：</div>
-      <div class="time-tag dis-flex flex-middle">146时21分</div>
+      <div class="time-tag dis-flex flex-middle">{{time}}</div>
     </div>
     <div v-if="list.length >= 3" class="rank dis-flex">
       <div class="item dis-flex vertical flex-middle flex item-2">
