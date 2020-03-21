@@ -10,8 +10,8 @@ function request (url, method, data = {}, header = {}) {
     let location = wx.getStorageSync('location') || {}
     let params = Object.assign(data, {
       token,
-      lat: location.latitude || 0,
-      lng: location.longitude || 0
+      lat: data.lat || location.latitude || 0,
+      lng: data.lng || location.longitude || 0
     })
     wx.request({
       url: BASE_URL + url, // 仅为示例，并非真实的接口地址
