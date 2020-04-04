@@ -15,18 +15,18 @@
             >{{item.title}}</li>
           </ul>
         </div>
-        <!-- <div class="food-attribute" v-for="(item, index) in food.attribute" :key="index">
+        <div class="food-attribute" v-for="(item, index) in food.attribute" :key="index">
           <p class="title">{{item.title}}:</p>
           <ul class="attribute-list">
             <li
               class="sku-item"
-              v-for="(text, k) in item.val"
+              v-for="(text, k) in item.attrs"
               :key="k"
-              :class="{'active-sku': item.curText === text}"
-              @click="chooseAttr(index,text)"
-            >{{text}}</li>
+              :class="{'active-sku': item.curId === text.attribute_id}"
+              @click="chooseAttr(index,text.attribute_id)"
+            >{{text.title}}</li>
           </ul>
-        </div> -->
+        </div>
         <div class="content-area">
           <div class="food-price" v-if="food">￥{{food.sku[skuIndex].price}}</div>
           <div class="btn-area">
@@ -60,7 +60,7 @@
           <p class="food-detail" v-if="food.description">{{food.description}}</p>
         </div>
         <div class="footer" v-if="food.sku">
-          <div class="content-area" v-if="food.sku.length <= 1">
+          <div class="content-area" v-if="food.sku.length <= 1 && food.attribute && food.attribute.length <= 1">
             <div class="food-price" v-if="food.sku.length">￥{{food.sku[0].price}}</div>
             <div class="btn-area">
               <div class="reduct" @click="subNum">
@@ -73,8 +73,8 @@
             </div>
           </div>
           <div class="add-cart" @click="handleAddCard">
-            <img src="../../../static/images/add-adr.png" alt v-if="food.sku.length > 1" />
-            <p>{{food.sku.length > 1 ? '选择规格': '加入购物车'}}</p>
+            <img src="../../../static/images/add-adr.png" alt v-if="food.sku.length > 1 || (food.attribute && food.attribute.length != 0)" />
+            <p>{{food.sku.length > 1 || (food.attribute && food.attribute.length != 0) ? '选择规格': '加入购物车'}}</p>
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@ export default {
   methods: {
     chooseAttr (index, text) {
       let attribute = this.food.attribute
-      attribute[index].curText = text
+      attribute[index].curId = text
       this.food.attribute = [].concat(attribute)
     },
     subNum () {
@@ -132,12 +132,17 @@ export default {
       this.shopId = shopid
       this.skuIndex = 0
       this.showType = type
+      if (food.attribute) {
+        food.attribute.forEach(ele => {
+          ele.curId = ele.attrs[0].attribute_id
+        })
+      }
       this.food = food
       this.num = this.food.sku[this.skuIndex].num >= 1 ? this.food.sku[this.skuIndex].num : 1
       if (type) {
         if (this.food.attribute) {
           this.food.attribute.forEach(ele => {
-            ele.curText = ele.val[0]
+            ele.curId = ele.attrs[0].attribute_id
           })
         }
         this.$refs.selectSku.toggle('show')
@@ -171,7 +176,7 @@ export default {
       })
 
       let attr = this.food.attribute.map(attr => {
-        return attr.curText
+        return attr.curId
       })
       this.SKU_CART_CART({index: this.food.index, foodIndex: this.food.foodIndex, count, num: this.num, skuIndex: this.skuIndex, attr: attr, skuTitle: this.food.sku[this.skuIndex].title})
       this.$refs.selectSku.toggle('hide')

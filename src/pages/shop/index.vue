@@ -127,7 +127,7 @@
                       <p class="normal-price" v-if="food.discount">￥{{food.sku[0].original_price}}</p>
                     </div>
                     <div class="btn-area">
-                      <div class="cart-button" v-if="food.sku.length < 2">
+                      <div class="cart-button" v-if="food.sku.length <= 1 && food.attribute.length <= 1">
                         <div
                           class="reduct extend"
                           @click.stop="reduceCart(food,foodIndex)"

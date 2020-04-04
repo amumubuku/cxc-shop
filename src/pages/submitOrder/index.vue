@@ -827,7 +827,7 @@ export default {
         return {
           sku_id: ele.id,
           number: ele.num,
-          attribute: ele.attribute.map(e => e).join(',')
+          attribute: ele.attr.map(e => e)
         }
       })
 

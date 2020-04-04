@@ -5,7 +5,7 @@
       :aria-expanded="active ? 'true' : 'false'"
       :class="active ? 'collapse-header' : 'is-active'">
       <div class="food-item"
-        v-for="(item, index) in goods"
+        v-for="(item, index) in goodsHandle"
         :key="index">
         <div class="food-img">
           <img :src="item.cover"
@@ -14,6 +14,7 @@
         <div class="foods-box">
           <div class="food-info">
             <p>{{item.title ? item.title :item.goods_title}}</p>
+            <p class="num">{{item.attrStr ? item.attrStr : ''}}</p>
             <p class="num">数量X{{item.num ? item.num : item.number}}</p>
           </div>
           <div class="food-price">¥{{item.foodPrice ? item.foodPrice : item.real_price}}</div>
@@ -49,6 +50,28 @@ export default {
     goods: {
       type: Array,
       default: []
+    }
+  },
+  computed: {
+    goodsHandle () {
+      let catchGoods = JSON.parse(JSON.stringify(this.goods))
+      catchGoods.forEach(item => {
+        if (Object.prototype.toString.call(item.attribute) === '[object String]') {
+          item.attrStr = item.attribute
+        } else {
+          item.attrStr = []
+          if (item.attribute) {
+            item.attribute.forEach(_item => {
+              if (_item.curId) {
+                let findItem = _item.attrs.find(item => Number(item.attribute_id) === Number(_item.curId))
+                item.attrStr.push(findItem.title)
+              }
+            })
+            item.attrStr = item.attrStr.join(' + ')
+          }
+        }
+      })
+      return catchGoods
     }
   },
   ready () {
@@ -124,7 +147,7 @@ export default {
       .foods-box:last-child {
         border:  none;
       }
-      
+
     }
 
     .food-item:last-child {

@@ -84,14 +84,33 @@ const mutations = {
     })
     cart[index].count = categoryNum
     let findIndex = food.findIndex(item => {
-      return item.goods_id === cart[index].goods[foodIndex].goods_id
+      // 购物车商品
+      let cartFood = cart[index].goods[foodIndex]
+      // 判断商品id
+      let judgeGoodsId = (item.goods_id === cartFood.goods_id)
+      // 判断商品属性是否相等
+      let judgeGoodsAttrs = true
+      item.attribute.forEach((item, index) => {
+        if (item.curText !== cartFood.attr[index]) {
+          judgeGoodsAttrs = false
+        }
+      })
+      return judgeGoodsId && judgeGoodsAttrs
     })
     if (findIndex >= 0) {
       food[findIndex] = cart[index].goods[foodIndex]
     } else {
-      food.push(cart[index].goods[foodIndex])
+      food.push(JSON.parse(JSON.stringify(cart[index].goods[foodIndex])))
     }
     state.food = [...food]
+    // 重新计算购物车数量
+    let findNum = 0
+    food.forEach(item => {
+      if (Number(item.goods_id === Number(cart[index].goods[foodIndex].goods_id))) {
+        findNum++
+      }
+    })
+    cart[index].goods[foodIndex].count = findNum
     state.cartList = cart
   },
   UPTATE_CART: (state, time) => {
