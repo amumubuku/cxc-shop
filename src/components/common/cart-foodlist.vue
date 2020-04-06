@@ -22,9 +22,9 @@
                     class="sku-title"
                     v-if="item.skuTitle"
                     style="padding-right:3px"
-                  >+{{item.skuTitle}}</div>
+                  >{{item.skuTitle}}</div>
                   <div class="attr-list">
-                    <p v-for="(item, k) in item.attr" :key="k">+{{item}}</p>
+                    <p v-for="(item, k) in item.attrStr" :key="k">+{{item}}</p>
                   </div>
                 </div>
               </div>
@@ -142,6 +142,19 @@ export default {
       this.diffPrice = (this.shopinfo.price_send - totalPrice).toFixed(2)
       this.totalPrice = (packingPrice + totalPrice).toFixed(2)
       this.packingPrice = packingPrice.toFixed(2)
+
+      foods.forEach(item => {
+        item.attrStr = []
+        if (item.attr && item.attr.length) {
+          item.attribute.forEach(_item => {
+            let findItem = _item.attrs.find(__item => Number(__item.attribute_id) === Number(_item.curId))
+            if (findItem) {
+              item.attrStr.push(findItem.title)
+            }
+          })
+        }
+      })
+
       this.foods = foods
       return foods
     }
