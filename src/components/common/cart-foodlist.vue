@@ -31,11 +31,11 @@
               <div class="food-item-right">
                 <div class="food-price">￥{{item.foodPrice}}</div>
                 <div class="cart-button">
-                  <div class="reduct extend" @click.stop="reductCart(item)">
+                  <div class="reduct extend" @click.stop="reductCart(item, index)">
                     <img src="../../../static/images/reduct-cart.png" alt />
                   </div>
                   <div class="cart-num">{{item.num}}</div>
-                  <div class="add extend" @click.stop="addCart(item)">
+                  <div class="add extend" @click.stop="addCart(item, index)">
                     <img src="../../../static/images/add-cart.png" alt />
                   </div>
                 </div>
@@ -96,10 +96,11 @@ export default {
     ...mapGetters(['food']),
     initFoodList: function () {
       let foods = []
+      foods = JSON.parse(JSON.stringify(this.food))
       let num = 0
       let totalPrice = 0
       let packingPrice = 0
-      this.food.forEach(ele => {
+      this.food.forEach((ele, eleIndex) => {
         num += ele.count
         if (ele.sku.length > 1) {
           ele.sku.forEach(sku => {
@@ -117,7 +118,9 @@ export default {
               totalPrice += foodPrice
               ele.foodPrice = foodPrice.toFixed(2)
               packingPrice += parseFloat(sku.packing_price * sku.num)
-              foods.push({...sku, ...ele})
+              // foods.push({...sku, ...ele})
+
+              foods[eleIndex] = {...sku, ...ele}
             }
           })
         } else {
@@ -135,7 +138,9 @@ export default {
           totalPrice += foodPrice
           packingPrice += parseFloat(sku.packing_price * sku.num)
           ele.foodPrice = foodPrice.toFixed(2)
-          foods.push({...sku, ...ele})
+          // foods.push({...sku, ...ele})
+
+          foods[eleIndex] = {...sku, ...ele}
         }
       })
       this.cartListNum = num
@@ -156,6 +161,7 @@ export default {
       })
 
       this.foods = foods
+      this.cartListNum = foods.length
       return foods
     }
   },
@@ -179,7 +185,7 @@ export default {
         complete: () => {}
       })
     },
-    addCart (item) {
+    addCart (item, index) {
       if (item.num >= item.stock) {
         wx.showToast({
           title: '购买的商品库存不足',
@@ -193,17 +199,29 @@ export default {
         })
         return false
       }
-      this.ADD_CART({index: item.index, foodIndex: item.foodIndex, num: ++item.num, skuIndex: item.skuIndex})
+
+      let hasMoreAttr = item.attr.length
+      if (hasMoreAttr) {
+        this.ADD_CART({index: item.index, foodIndex: item.foodIndex, num: ++item.num, skuIndex: item.skuIndex, foodsListIndex: index})
+      } else {
+        this.ADD_CART({index: item.index, foodIndex: item.foodIndex, num: ++item.num, skuIndex: item.skuIndex})
+      }
     },
-    reductCart (item) {
+    reductCart (item, index) {
       let count = 0
-      let num = item.sku[item.skuIndex].num
+      let num = this.initFoodList[index].num
       if (num > item.min_buy) {
         count = num - 1
       } else {
         count = num - item.min_buy
       }
-      this.ADD_CART({index: item.index, foodIndex: item.foodIndex, num: count, skuIndex: item.skuIndex})
+
+      let hasMoreAttr = item.attr.length
+      if (hasMoreAttr) {
+        this.ADD_CART({index: item.index, foodIndex: item.foodIndex, num: count, skuIndex: item.skuIndex, foodsListIndex: index})
+      } else {
+        this.ADD_CART({index: item.index, foodIndex: item.foodIndex, num: count, skuIndex: item.skuIndex})
+      }
     },
     showFoodList () {
       if (this.food.length) {

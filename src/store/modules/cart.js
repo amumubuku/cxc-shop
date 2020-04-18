@@ -107,15 +107,7 @@ const mutations = {
     } else {
       food.push(JSON.parse(JSON.stringify(cart[index].goods[foodIndex])))
     }
-    state.food = [...food]
-    // 重新计算购物车数量
-    // let findNum = 0
-    // food.forEach(item => {
-    //   if (Number(item.goods_id === Number(cart[index].goods[foodIndex].goods_id))) {
-    //     findNum++
-    //   }
-    // })
-    // cart[index].goods[foodIndex].count = findNum
+    state.food = [...JSON.parse(JSON.stringify(food))]
     state.cartList = cart
   },
   UPTATE_CART: (state, time) => {
@@ -131,44 +123,72 @@ const mutations = {
     }
   },
   ADD_CART: (state, data) => {
-    let {index, foodIndex, num, skuIndex} = data
+    let {index, foodIndex, num, skuIndex, foodsListIndex} = data
     if (num < 0) {
       return
     }
-    let cart = state.cartList
-    let food = state.food
-    let categoryNum = 0
-    let foodNum = 0
-    cart[index].goods[foodIndex].sku[skuIndex].num = num
+    if (isNaN(foodsListIndex)) {
+      let cart = state.cartList
+      let food = state.food
+      let categoryNum = 0
+      let foodNum = 0
+      cart[index].goods[foodIndex].sku[skuIndex].num = num
 
-    if (cart[index].goods[foodIndex].sku.length > 1) {
-      cart[index].goods[foodIndex].sku.forEach(sku => {
-        if (sku.num) {
-          foodNum += sku.num
-        }
-      })
-      cart[index].goods[foodIndex].count = foodNum
-    } else {
-      cart[index].goods[foodIndex].count = num
-    }
-    cart[index].goods.forEach(food => {
-      categoryNum += food.count
-    })
-    cart[index].count = categoryNum
-    let findIndex = food.findIndex(item => {
-      return item.goods_id === cart[index].goods[foodIndex].goods_id
-    })
-    if (findIndex >= 0) {
-      if (cart[index].goods[foodIndex].count) {
-        food[findIndex] = cart[index].goods[foodIndex]
+      if (cart[index].goods[foodIndex].sku.length > 1) {
+        cart[index].goods[foodIndex].sku.forEach(sku => {
+          if (sku.num) {
+            foodNum += sku.num
+          }
+        })
+        cart[index].goods[foodIndex].count = foodNum
       } else {
-        food.splice(findIndex, 1)
+        cart[index].goods[foodIndex].count = num
       }
+      cart[index].goods.forEach(food => {
+        categoryNum += food.count
+      })
+      cart[index].count = categoryNum
+      let findIndex = food.findIndex(item => {
+        return item.goods_id === cart[index].goods[foodIndex].goods_id
+      })
+      if (findIndex >= 0) {
+        if (cart[index].goods[foodIndex].count) {
+          food[findIndex] = cart[index].goods[foodIndex]
+        } else {
+          food.splice(findIndex, 1)
+        }
+      } else {
+        food.push(cart[index].goods[foodIndex])
+      }
+      state.food = [...JSON.parse(JSON.stringify(food))]
+      state.cartList = cart
     } else {
-      food.push(cart[index].goods[foodIndex])
+      let food = state.food
+      let cart = state.cartList
+      food[foodsListIndex].sku[skuIndex].num = num
+      if (foodsListIndex >= 0) {
+        if (num) {
+          food[foodsListIndex].num = num
+        } else {
+          food.splice(foodsListIndex, 1)
+        }
+      }
+
+      let setNum = 0
+      if (food.length) {
+        let goodsId = food[foodsListIndex].goods_id
+        let findAry = food.filter(item => Number(item.goods_id) === Number(goodsId))
+        let numAry = findAry.map(item => {
+          if (!item.num) {
+            item.num = item.min_buy
+          }
+          return item.num
+        })
+        setNum = numAry.reduce((x, y) => x + y)
+      }
+      cart[index].goods[foodIndex].count = setNum
+      state.food = [...JSON.parse(JSON.stringify(food))]
     }
-    state.food = [...food]
-    state.cartList = cart
   }
 }
 
