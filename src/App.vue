@@ -89,4 +89,27 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
+/*行数省略*/
+.clamp-1 {
+    display:-webkit-box;
+    overflow:hidden;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:1;
+    line-height: 1.5;
+}
+.clamp-2 {
+    display:-webkit-box;
+    overflow:hidden;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    line-height: 1.5;
+}
+.clamp-3 {
+    display:-webkit-box;
+    overflow:hidden;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:3;
+    line-height: 1.5;
+}
 </style>
