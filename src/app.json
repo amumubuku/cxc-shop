@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/shopCanteen/main",
     "pages/index/main",
     "pages/success/main",
     "pages/withdrawalDetail/main",
