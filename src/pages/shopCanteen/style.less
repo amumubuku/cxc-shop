@@ -1,7 +1,7 @@
 .page-wrap {
   width: 100vw;
   height: 100vh;
-  background: red;
+  background: rgba(248, 248, 250, 1);
 }
 
 .top {
@@ -43,7 +43,8 @@
       .search-icon {
         width: 11px;
         height: 11px;
-        background: red;
+        background: url(https://img.icaixiaochu.com/5ea0454ccbeea.png);
+        background-size: cover;
       }
 
       .search-str {
@@ -89,9 +90,9 @@
           left: 0;
           top: 50%;
           transform: translate(0, -50%);
-          width: 10px;
-          height: 20px;
-          background: linear-gradient(to bottom, red, blue);
+          width: 4px;
+          height: 16px;
+          background: linear-gradient(to bottom, rgba(255, 162, 0, 1), rgba(255, 203, 34, 1));
           border-radius: 0 4px 4px 0;
         }
       }
@@ -105,13 +106,18 @@
 
     .item-list {
       width: 100%;
-      padding-top: 14px;
       box-sizing: border-box;
       padding-left: 20px;
+
+      &.opacity {
+        opacity: 0;
+      }
 
       .item-list-title {
         font-size: 14px;
         color: rgba(130, 137, 148, 1);
+        padding-top: 14px;
+        box-sizing: border-box;
       }
 
       .list {
@@ -119,7 +125,7 @@
         .item {
           padding: 15px 15px 15px 0;
           box-sizing: border-box;
-          border-top: 1px solid red;
+          border-top: 1px solid rgba(229, 229, 229, 1);
 
           &:nth-of-type(1) {
             border-top: none;
@@ -145,6 +151,17 @@
                 transform: translate(-50%, -50%);
                 text-align: center;
                 line-height: 26px;
+              }
+            }
+
+            .item-wrap {
+
+              .food-title {
+                color: rgba(130, 137, 148, 1);
+              }
+
+              .sales-stock {
+                color: rgba(130, 137, 148, 1);
               }
             }
           }
@@ -193,7 +210,7 @@
             .food-title {
               font-size: 16px;
               color: rgba(51, 51, 51, 1);
-              font-weight: bold;
+              font-weight: 500;
             }
 
             .sales-stock {
@@ -235,7 +252,7 @@
                 text-align: center;
                 line-height: 21px;
 
-                &:nth-of-type(3) {
+                &.active {
                   background: rgba(255, 145, 0, 1);
                   color: #fff;
                 }
@@ -265,10 +282,15 @@
   .cart-icon {
     width: 27px;
     height: 27px;
-    background: red;
+    background: url(https://img.icaixiaochu.com/5ea0450850aaa.png);
+    background-size: cover!important;
     position: relative;
     top: 0;
     left: 0;
+
+    &.active {
+      background: url(https://img.icaixiaochu.com/5ea046f56834a.png);
+    }
 
     .num {
       height: 16px;
@@ -299,9 +321,14 @@
     border-radius: 17px;
     padding: 0 21px;
     box-sizing: border-box;
-    background: linear-gradient(to right, rgba(240, 127, 24, 1), rgba(245, 98, 9, 1));
+    background: rgba(105, 109, 126, 1);
     font-size: 14px;
-    color: rgba(255, 255, 255, 1);
+    color: rgba(191, 196, 199, 1);
+
+    &.active {
+      background: linear-gradient(to right, rgba(240, 127, 24, 1), rgba(245, 98, 9, 1));
+      color: rgba(255, 255, 255, 1);
+    }
   }
 }
 
@@ -322,7 +349,8 @@
     width: 16px;
     height: 16px;
     margin-right: 2px;
-    background: red;
+    background: url(https://img.icaixiaochu.com/5ea0459d01969.png);
+    background-size: cover;
   }
 }
 
@@ -357,7 +385,8 @@
     .clear-icon {
       width: 12px;
       height: 12px;
-      background: red;
+      background: url(https://img.icaixiaochu.com/5ea04afa2bec4.png);
+      background-size: cover;
     }
 
     .clear-str {

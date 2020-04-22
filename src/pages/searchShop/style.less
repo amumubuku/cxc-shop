@@ -1,0 +1,466 @@
+
+.page-wrap {
+  width: 100vw;
+  min-height: 100vh;
+  background: rgba(248, 248, 250, 1);
+  padding-bottom: 8px;
+  box-sizing: border-box;
+}
+
+.search-wrap {
+  width: 100%;
+  background: #fff;
+  padding: 10px 20px;
+  box-sizing: border-box;
+
+  .input-wrap {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 30px;
+    padding: 15px 10px;
+    box-sizing: border-box;
+    background: rgba(248, 248, 250, 1);
+    border-radius: 3px;
+
+    .input-icon {
+      width: 14px;
+      height: 14px;
+      background: url(https://img.icaixiaochu.com/5ea061c96a4f8.png);
+      background-size: cover;
+      margin-right: 12px;
+    }
+
+    .input {
+      height: 100%;
+      font-size: 14px;
+      color: rgba(51, 51, 51, 1);
+    }
+
+    .clear {
+      width: 14px;
+      height: 14px;
+      background: red;
+    }
+  }
+
+  .btn {
+    font-size: 14px;
+    color: rgba(51, 51, 51, 1);
+    margin-left: 20px;
+  }
+
+  .cart-icon {
+    width: 20px;
+    height: 20px;
+    background: url(https://img.icaixiaochu.com/5ea0450850aaa.png);
+    background-size: cover;
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-left: 22px;
+
+    .num {
+      height: 16px;
+      border-radius: 8px;
+      padding: 0 4px;
+      box-sizing: border-box;
+      background: rgba(255, 70, 21, 1);
+      font-size: 10px;
+      color: rgba(255, 255, 255, 1);
+      position: absolute;
+      top: -10px;
+      right: -10px;
+    }
+  }
+}
+
+.list {
+  width: 100%;
+  padding: 0 8px;
+  box-sizing: border-box;
+
+  .item {
+    width: 176px;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 10px rgba(65, 98, 126, 0.1);
+    background: #fff;
+    border-radius: 5px;
+    float: left;
+    margin-top: 10px;
+
+    &:nth-of-type(2n) {
+      margin-left: 6px;
+    }
+
+    .item-img {
+      width: 100%;
+      height: 156px;
+      background: red;
+      background-size: cover!important;
+    }
+
+    .item-title {
+      font-size: 16px;
+      color: rgba(51, 51, 51, 1);
+      width: 100%;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .sales-stock {
+      width: 100%;
+      font-size: 12px;
+      color: rgba(130, 137, 148, 1);
+      margin-top: 2px;
+
+      .stock {
+        margin-left: 10px;
+      }
+    }
+
+    .price-add {
+      width: 100%;
+      margin-top: 5px;
+
+      .price {
+        font-size: 18px;
+        color: rgba(245, 98, 9, 1);
+      }
+
+      .add-btn {
+        width: 27px;
+        height: 27px;
+        border-radius: 50%;
+        background: linear-gradient(to right, rgba(255, 145, 0, 1), rgba(255, 181, 34, 1));
+        font-size: 30px;
+        font-weight: bold;
+        color: #fff;
+        line-height: 20px;
+        text-align: center;
+      }
+
+      .btn {
+        height: 24px;
+        border-radius: 12px;
+        padding: 0 10px;
+        box-sizing: border-box;
+        font-size: 10px;
+        color: rgba(255, 255, 255, 1);
+        background: linear-gradient(to right, rgba(255, 145, 0, 1), rgba(255, 181, 34, 1))
+      }
+
+      .select-num {
+
+        .change-num-btn {
+          width: 24px;
+          height: 24px;
+          background: #fff;
+          border: 2px solid rgba(255, 145, 0, 1);
+          border-radius: 50%;
+          font-size: 20px;
+          color: rgba(255, 145, 0, 1);
+          font-weight: bold;
+          text-align: center;
+          line-height: 21px;
+
+          &.active {
+            background: rgba(255, 145, 0, 1);
+            color: #fff;
+          }
+        }
+
+        .num {
+          font-size: 16px;
+          color: rgba(51, 51, 51, 1);
+          margin: 0 10px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.no-list {
+  width: 100%;
+
+  .no-list-icon {
+    width: 193px;
+    height: 108px;
+    background: url(https://img.icaixiaochu.com/5ea06611cc2ee.png);
+    background-size: cover;
+  }
+
+  .no-list-str {
+    font-size: 16px;
+    color: rgba(105, 109, 126, 1);
+    margin-top: 30px;
+  }
+}
+
+.black-bg {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.64);
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  &.cart-list-bg {
+    height: calc(100vh - 54px);
+  }
+}
+
+.cart-list {
+  width: 100%;
+  position: fixed;
+  bottom: 54px;
+  left: 0;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+
+  .cart-list-title {
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(248, 248, 250, 1);
+    padding: 15px 23px;
+    box-sizing: border-box;
+
+    .clear-icon {
+      width: 12px;
+      height: 12px;
+      background: url(https://img.icaixiaochu.com/5ea04afa2bec4.png);
+      background-size: cover;
+    }
+
+    .clear-str {
+      font-size: 12px;
+      color: rgba(105, 109, 126, 1);
+      margin-left: 5px;
+    }
+  }
+
+  .list {
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+    background: #fff;
+
+    .item {
+      width: 100%;
+      padding: 15px 0;
+      box-sizing: border-box;
+      border-top: 1px solid rgba(229, 229, 229, 1);
+
+      &:nth-of-type(1) {
+        border-top: none;
+      }
+
+      .item-img {
+        width: 62px;
+        height: 62px;
+        background: red;
+        background-size: cover!important;
+        background-position: center!important;
+        border-radius: 4px;
+        position: relative;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+      }
+
+      .item-wrap {
+        height: 62px;
+        padding-left: 10px;
+        box-sizing: border-box;
+
+        .item-title {
+          font-size: 14px;
+          color: rgba(51, 51, 51, 1);
+          font-weight: bold;
+        }
+
+        .item-des {
+          font-size: 12px;
+          color: rgba(130, 137, 148, 1);
+        }
+
+        .price {
+          font-size: 16px;
+          color: rgba(245, 98, 9, 1);
+        }
+
+        .price-icon {
+          font-size: 12px;
+          color: rgba(245, 98, 9, 1);
+        }
+      }
+
+      .select-num {
+
+        .change-num-btn {
+          width: 24px;
+          height: 24px;
+          background: #fff;
+          border: 2px solid rgba(255, 145, 0, 1);
+          border-radius: 50%;
+          font-size: 20px;
+          color: rgba(255, 145, 0, 1);
+          font-weight: bold;
+          text-align: center;
+          line-height: 21px;
+
+          &:nth-of-type(3) {
+            background: rgba(255, 145, 0, 1);
+            color: #fff;
+          }
+        }
+
+        .num {
+          font-size: 16px;
+          color: rgba(51, 51, 51, 1);
+          margin: 0 10px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.add-cart {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  background: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+
+  .food-info {
+    width: 100%;
+    padding: 30px 20px 0 20px;
+    box-sizing: border-box;
+
+    .food-img {
+      width: 47px;
+      height: 47px;
+      border-radius: 3px;
+      background: red;
+      background-size: cover!important;
+      background-position: center!important;
+      margin-right: 10px;
+    }
+
+    .food-title {
+      font-size: 16px;
+      color: rgba(51, 51, 51, 1);
+      font-weight: bold;
+    }
+
+    .food-price {
+      font-size: 18px;
+      color: rgba(245, 98, 9, 1);
+    }
+
+    .select-num {
+
+      .change-num-btn {
+        width: 24px;
+        height: 24px;
+        background: #fff;
+        border: 2px solid rgba(255, 145, 0, 1);
+        border-radius: 50%;
+        font-size: 20px;
+        color: rgba(255, 145, 0, 1);
+        font-weight: bold;
+        text-align: center;
+        line-height: 21px;
+
+        &:nth-of-type(3) {
+          background: rgba(255, 145, 0, 1);
+          color: #fff;
+        }
+      }
+
+      .num {
+        font-size: 16px;
+        color: rgba(51, 51, 51, 1);
+        margin: 0 10px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .attr-list {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    .attr-item {
+      width: 100%;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      box-sizing: border-box;
+      border-top: 1px solid red;
+
+      &:nth-of-type(1) {
+        border-top: 0;
+      }
+
+      .item-title {
+        font-size: 16px;
+        color: rgba(51, 51, 51, 1);
+        font-weight: bold;
+      }
+
+      .item-list {
+        width: 100%;
+        margin-top: 10px;
+
+        .item {
+          height: 24px;
+          border-radius: 12px;
+          padding: 0 15px;
+          box-sizing: border-box;
+          font-size: 12px;
+          color: rgba(105, 109, 126, 1);
+          background: rgba(248, 248, 250, 1);
+          margin-left: 20px;
+
+          &:nth-of-type(1) {
+            margin-left: 0;
+          }
+
+          &.active {
+            background: rgba(255, 145, 0, 1);
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  .select-attr {
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background: rgba(248, 248, 250, 1);
+    font-size: 14px;
+    color: rgba(130, 137, 148, 1);
+
+    .select-str {
+      color: rgba(51, 51, 51, 1);
+    }
+  }
+
+  .btn {
+    width: calc(100% - 27px);
+    height: 44px;
+    border-radius: 22px;
+    background: linear-gradient(to right, rgba(245, 98, 9, 1), rgba(240, 127, 24, 1));
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    margin: 20px 0;
+  }
+}
