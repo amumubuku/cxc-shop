@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/shopCanteen/main",
+    "pages/orderCopy/main",
     "pages/payShopFoodSuccess/main",
     "pages/searchShop/main",
     "pages/confirmShopList/main",

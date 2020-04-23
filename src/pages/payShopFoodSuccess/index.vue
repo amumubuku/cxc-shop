@@ -3,7 +3,7 @@
     <div class="top dis-flex vertical flex-middle">
       <div class="success-icon"></div>
       <div class="success-title">订单支付成功，努力出餐中！</div>
-      <div class="success-des">等待有点无聊？前往叮叮点小程序看看，发现宝藏美食</div>
+      <div class="success-des">等待有点无聊？教你如何点外卖赚钱</div>
       <div @click="toOrder" class="btn dis-flex flex-middle flex-center">查看我的订单</div>
     </div>
     <div class="other dis-flex vertical">
@@ -13,7 +13,7 @@
           <div class="item-img"></div>
           <div class="dis-flex vertical flex">
             <div class="item-title">叮叮点共享外卖平台</div>
-            <div class="item-des">拒绝虚价，承诺低佣金，探索外卖新生态</div>
+            <div class="item-des">堂食与外卖同价，分享赚收益，探索外卖新生态</div>
           </div>
         </div>
         <div class="right dis-flex flex-middle flex-right">
@@ -30,8 +30,8 @@ export default {
   methods: {
     // 去订单
     toOrder () {
-      wx.switchTab({
-        url: `../order/main`
+      wx.navigateTo({
+        url: `../orderCopy/main`
       })
     },
     // 去首页

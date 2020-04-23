@@ -14,7 +14,7 @@
   .logo {
     width: 50px;
     height: 50px;
-    border-radius: 3px;
+    border-radius: 6px;
     border: 1px solid rgba(229, 233, 235, 1);
     background: red;
     background-size: cover!important;
@@ -32,32 +32,33 @@
       color: rgba(51, 51, 51, 1);
       font-weight: bold;
     }
-
-    .search {
-      height: 24px;
-      border-radius: 12px;
-      background: rgba(242, 242, 245, 1);
-      padding: 0 9px;
-      box-sizing: border-box;
-
-      .search-icon {
-        width: 11px;
-        height: 11px;
-        background: url(https://img.icaixiaochu.com/5ea0454ccbeea.png);
-        background-size: cover;
-      }
-
-      .search-str {
-        font-size: 12px;
-        color: rgba(51, 51, 51, 1);
-        margin-left: 4px;
-      }
-    }
   }
 
   .shop-des {
     font-size: 14px;
     color: #999;
+  }
+
+  .search {
+    height: 24px;
+    border-radius: 12px;
+    background: rgba(242, 242, 245, 1);
+    padding: 0 9px;
+    box-sizing: border-box;
+    transform: translateY(5px);
+
+    .search-icon {
+      width: 11px;
+      height: 11px;
+      background: url(https://img.icaixiaochu.com/5ea0454ccbeea.png);
+      background-size: cover;
+    }
+
+    .search-str {
+      font-size: 12px;
+      color: rgba(51, 51, 51, 1);
+      margin-left: 4px;
+    }
   }
 }
 
@@ -73,7 +74,7 @@
 
     .item {
       font-size: 12px;
-      color: rgba(51, 51, 51, 1);
+      color: #828994;
       padding: 20px 13px;
       box-sizing: border-box;
       position: relative;
@@ -82,6 +83,8 @@
 
       &.active {
         background: #fff;
+        color: #333333;
+        font-weight: 500;
 
         &::after {
           content: '';
@@ -91,7 +94,7 @@
           top: 50%;
           transform: translate(0, -50%);
           width: 4px;
-          height: 16px;
+          height: 30%;
           background: linear-gradient(to bottom, rgba(255, 162, 0, 1), rgba(255, 203, 34, 1));
           border-radius: 0 4px 4px 0;
         }
@@ -107,7 +110,7 @@
     .item-list {
       width: 100%;
       box-sizing: border-box;
-      padding-left: 20px;
+      padding-left: 15px;
 
       &.opacity {
         opacity: 0;
@@ -162,6 +165,10 @@
 
               .sales-stock {
                 color: rgba(130, 137, 148, 1);
+
+                .stock {
+                  margin-left: 10px;
+                }
               }
             }
           }
@@ -243,8 +250,9 @@
               .change-num-btn {
                 width: 24px;
                 height: 24px;
-                background: #fff;
-                border: 2px solid rgba(255, 145, 0, 1);
+                background: url(https://img.icaixiaochu.com/5ea198c3b2f12.png);
+                background-size: cover;
+                // border: 2px solid rgba(255, 145, 0, 1);
                 border-radius: 50%;
                 font-size: 20px;
                 color: rgba(255, 145, 0, 1);
@@ -253,7 +261,8 @@
                 line-height: 21px;
 
                 &.active {
-                  background: rgba(255, 145, 0, 1);
+                  background: url(https://img.icaixiaochu.com/5ea197da9452c.png);
+                  background-size: cover;
                   color: #fff;
                 }
               }
@@ -267,6 +276,12 @@
             }
           }
         }
+      }
+
+      .line {
+        width: 100%;
+        height: 14px;
+        background: rgba(248, 248, 250, 1);
       }
     }
   }
@@ -313,6 +328,10 @@
 
     .price-icon {
       font-size: 14px;
+    }
+
+    .price-num {
+      transform: translateY(3px);
     }
   }
 
@@ -406,7 +425,7 @@
       width: 100%;
       padding: 15px 0;
       box-sizing: border-box;
-      border-top: 1px solid red;
+      border-top: 1px solid #E5E5E5;
 
       &:nth-of-type(1) {
         border-top: none;
@@ -444,6 +463,8 @@
         .price {
           font-size: 16px;
           color: rgba(245, 98, 9, 1);
+          position: relative;
+          top: 2px;
         }
 
         .price-icon {
@@ -457,8 +478,9 @@
         .change-num-btn {
           width: 24px;
           height: 24px;
-          background: #fff;
-          border: 2px solid rgba(255, 145, 0, 1);
+          background: url(https://img.icaixiaochu.com/5ea198c3b2f12.png);
+          background-size: cover;
+          // border: 2px solid rgba(255, 145, 0, 1);
           border-radius: 50%;
           font-size: 20px;
           color: rgba(255, 145, 0, 1);
@@ -467,7 +489,8 @@
           line-height: 21px;
 
           &:nth-of-type(3) {
-            background: rgba(255, 145, 0, 1);
+            background: url(https://img.icaixiaochu.com/5ea197da9452c.png);
+            background-size: cover;
             color: #fff;
           }
         }
@@ -522,8 +545,9 @@
       .change-num-btn {
         width: 24px;
         height: 24px;
-        background: #fff;
-        border: 2px solid rgba(255, 145, 0, 1);
+        background: url(https://img.icaixiaochu.com/5ea198c3b2f12.png);
+        background-size: cover;
+        // border: 2px solid rgba(255, 145, 0, 1);
         border-radius: 50%;
         font-size: 20px;
         color: rgba(255, 145, 0, 1);
@@ -556,7 +580,7 @@
       padding-top: 20px;
       padding-bottom: 20px;
       box-sizing: border-box;
-      border-top: 1px solid red;
+      border-top: 1px solid #E5E5E5;
 
       &:nth-of-type(1) {
         border-top: 0;
@@ -602,6 +626,7 @@
     background: rgba(248, 248, 250, 1);
     font-size: 14px;
     color: rgba(130, 137, 148, 1);
+    margin-top: 20px;
 
     .select-str {
       color: rgba(51, 51, 51, 1);
@@ -618,4 +643,13 @@
     font-weight: bold;
     margin: 20px 0;
   }
+}
+
+.white-bg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #fff;
 }

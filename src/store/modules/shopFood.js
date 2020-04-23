@@ -2,13 +2,19 @@ const state = {
   shopList: [],
   shopMoreAttrsList: [],
   searchKey: null,
-  shopInfo: null
+  shopInfo: null,
+  shopId: null
 }
 
 const mutations = {
   // 设置商家堂食菜单
   SET_SHOP_LIST: (state, list) => {
     state.shopList = list
+  },
+
+  // 设置商家ID
+  SET_SHOP_ID: (state, id) => {
+    state.shopId = id
   },
 
   // 添加多属性购物车列表
@@ -111,7 +117,8 @@ const getters = {
     let cartFoodNumAry = cartFoodList.map(item => item.num)
     let cartFoodNumPrice = cartFoodList.map(item => item.price)
     let cartFoodNum = cartFoodNumAry.reduce((a, b) => a + b, 0)
-    let cartFoodPrice = cartFoodNumPrice.reduce((a, b) => parseFloat(a + b).toFixed(2), 0)
+    console.log(cartFoodNumPrice)
+    let cartFoodPrice = cartFoodNumPrice.reduce((a, b) => (parseFloat(a) + parseFloat(b)).toFixed(2), 0)
     return {
       cartFoodList,
       cartFoodPrice,

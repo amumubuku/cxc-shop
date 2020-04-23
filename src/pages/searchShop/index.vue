@@ -240,7 +240,7 @@ export default {
     // 检测
     beforeAddCartCheck (item) {
       let error = ''
-      if (item.goods_status) {
+      if (item && item.goods_status) {
         error = 'item.goods_status'
         wx.showToast({
           title: '商品不支持加入购物车',

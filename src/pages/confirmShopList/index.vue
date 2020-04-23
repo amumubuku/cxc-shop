@@ -1,8 +1,8 @@
 <template>
   <div class="page-wrap dis-flex vertical flex-middle">
     <div class="top dis-flex flex-middle">
-      <div class="input-title dis-flex flex-middle">请填写您所在的桌位号:</div>
-      <input :focus="true" v-model="seat" class="input dis-flex flex" type="number">
+      <div class="input-title dis-flex flex-middle">请填写您的桌位号或手机尾号:</div>
+      <input placeholder-style="color: #BABDC8;font-size: 14px;font-weight: 400;" placeholder="请输入" :focus="true" v-model="seat" class="input DINN dis-flex flex" type="number">
     </div>
     <div class="body dis-flex vertical">
       <div class="shop-info dis-flex flex-middle">
@@ -33,14 +33,14 @@
       </div>
       <div class="remarks dis-flex flex-middle">
         <div class="remarks-title">用餐备注：</div>
-        <input v-model="remark" class="input" type="text" placeholder="非必填，请填写您的需要">
+        <input placeholder-style="color: #BABDC8;" v-model="remark" class="input" type="text" placeholder="非必填，请填写您的需要">
       </div>
       <div class="all-computed dis-flex flex-bottom flex-right">
         <div class="num">共 {{allFoodNum}} 件商品</div>
         <div class="price dis-flex flex-bottom">
           <div class="price-title">小计</div>
           <div class="price-icon">¥</div>
-          <div class="price-num">{{allFoodPrice}}</div>
+          <div class="price-num DINN">{{allFoodPrice}}</div>
         </div>
       </div>
     </div>
@@ -119,7 +119,7 @@ export default {
         // this.toSuccess()
         // return
         let { data } = await this.$http.post('/createForHereOrder', {
-          shop_id: 2,
+          shop_id: this.$store.state.shopFood.shopId,
           remark: this.remark,
           seat: this.seat,
           goods: this.handleGoodsParams()

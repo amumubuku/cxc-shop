@@ -4,15 +4,17 @@
       <div class="logo" :style="{
         background: 'url(' + shopInfo.icon + ')'
       }"></div>
-      <div class="dis-flex vertical flex">
-        <div class="shop-title dis-flex flex-middle">
-          <div class="shop-title-str dis-flex flex-middle flex">{{shopInfo.title}}</div>
-          <div @click="toSearch" class="search dis-flex flex-middle">
-            <div class="search-icon"></div>
-            <div class="search-str">搜索</div>
+      <div class="dis-flex flex-middle flex">
+        <div class="dis-flex vertical flex">
+          <div class="shop-title dis-flex flex-middle">
+            <div class="shop-title-str dis-flex flex-middle flex">{{shopInfo.title}}</div>
           </div>
+          <div class="shop-des clamp-2">{{shopInfo.announcement}}</div>
         </div>
-        <div class="shop-des clamp-2">{{shopInfo.announcement}}</div>
+        <div @click="toSearch" class="search dis-flex flex-middle">
+          <div class="search-icon"></div>
+          <div class="search-str">搜索</div>
+        </div>
       </div>
     </div>
     <div v-if="shopList.length" class="body dis-flex flex">
@@ -22,7 +24,7 @@
         </div>
       </div>
       <scroll-view class="food-list" :scroll-top="scrollTop" scroll-y="true" @scroll="scrollRight($event)" @scrolltolower="scrolltolower">
-        <div v-if="!titleHeight && !itemHeight" class="item-list opacity dis-flex vertical">
+        <div v-if="!titleHeight && !itemHeight && !lineHeight" class="item-list opacity dis-flex vertical">
           <div id="get-title" class="item-list-title">测试</div>
           <div id="get-item" class="list dis-flex vertical">
             <div class="item dis-flex flex-middle">
@@ -42,6 +44,7 @@
               </div>
             </div>
           </div>
+          <div id="line" class="line"></div>
         </div>
         <div v-for="(item, index) in shopList" :key="index" class="item-list dis-flex vertical">
           <div class="item-list-title">{{item.title}}</div>
@@ -55,7 +58,7 @@
                   <div class="food-title">{{_item.title}}</div>
                   <div class="sales-stock dis-flex flex-middle">
                     <div class="sales">月售{{_item.monthly_sale}}</div>
-                    <div class="sales">库存{{_item.stock}}</div>
+                    <div class="stock">库存{{_item.stock}}</div>
                   </div>
                 </div>
                 <div class="price-operating dis-flex flex-middle flex-between">
@@ -70,6 +73,7 @@
               </div>
             </div>
           </div>
+          <div class="line"></div>
         </div>
       </scroll-view>
     </div>
@@ -80,7 +84,7 @@
         </div>
         <div class="all-price dis-flex flex-bottom">
           <div class="price-icon">¥</div>
-          <div class="price-num">{{allFoodPrice}}</div>
+          <div class="price-num DINN">{{allFoodPrice}}</div>
         </div>
       </div>
       <div @click.stop="confirmOrder" class="btn dis-flex flex-middle flex-center" :class="allFoodNum && 'active'">选好了</div>
@@ -114,7 +118,7 @@
                 </div>
                 <div class="item-price DINN dis-flex flex-bottom">
                   <div class="price-icon">¥</div>
-                  <div class="price">{{item.price}}</div>
+                  <div class="price DINN">{{item.price}}</div>
                 </div>
               </div>
             </div>
@@ -136,7 +140,7 @@
           }"></div>
           <div class="dis-flex vertical">
             <div class="food-title">{{nowSelectGoodsInfo.title}}</div>
-            <div class="food-price">¥{{selectShowPrice}}</div>
+            <div class="food-price DINN">¥{{selectShowPrice}}</div>
           </div>
         </div>
         <div class="select-num dis-flex flex-middle">
@@ -165,6 +169,8 @@
       </div>
       <div @click="addCart" class="btn dis-flex flex-middle flex-center">+ 加入购物车</div>
     </div>
+
+    <div v-if="!titleHeight && !itemHeight && !lineHeight" class="white-bg"></div>
   </div>
 </template>
 
@@ -191,7 +197,9 @@ export default {
       // 滚动区间
       scrollInterval: [],
       // 滚动条位置
-      scrollTop: 0
+      scrollTop: 0,
+      // 分割线高度
+      lineHeight: 0
     }
   },
   computed: {
@@ -230,7 +238,8 @@ export default {
       return str.join('、')
     }
   },
-  onLoad () {
+  onLoad (option) {
+    this.$store.commit('SET_SHOP_ID', option.shopId)
     this.getForHereShop()
     this.fetchForHereShopGoods()
   },
@@ -258,8 +267,8 @@ export default {
     },
     // 去订单
     toOrder () {
-      wx.switchTab({
-        url: `../order/main`
+      wx.navigateTo({
+        url: `../orderCopy/main`
       })
     },
     // 确认订单
@@ -348,7 +357,7 @@ export default {
     // 检测
     beforeAddCartCheck (item) {
       let error = ''
-      if (item.goods_status) {
+      if (item && item.goods_status) {
         error = 'item.goods_status'
         wx.showToast({
           title: '商品不支持加入购物车',
@@ -373,6 +382,9 @@ export default {
     handleData (data) {
       data.forEach((item, index) => {
         item.goods && item.goods.forEach((_item, _index) => {
+          // 设置显示价格
+          // _item.show_price = _item.sku[0].price
+
           // 兼容处理
           if (!_item.attribute) {
             _item.attribute = []
@@ -440,7 +452,7 @@ export default {
       let nowHeight = 0
       catchData.forEach(item => {
         let titleHeight = this.titleHeight
-        let itemHeight = this.itemHeight * item.goods.length + item.goods.length
+        let itemHeight = this.itemHeight * item.goods.length + item.goods.length + this.lineHeight
         item.height = nowHeight
         let starTop = nowHeight
         nowHeight = nowHeight + titleHeight + itemHeight
@@ -455,17 +467,21 @@ export default {
     async fetchForHereShopGoods () {
       try {
         let { data } = await this.$http.post('/fetchForHereShopGoods', {
-          shop_id: 2
+          shop_id: this.$store.state.shopFood.shopId
         })
         data = this.handleData(data)
         this.$store.commit('SET_SHOP_LIST', data)
-        this.$nextTick(async () => {
-          let titleHeight = await this.getRect('#get-title')
-          let itemHeight = await this.getRect('#get-item')
-          this.titleHeight = titleHeight
-          this.itemHeight = itemHeight
-          this.setHeight(data)
-        })
+        setTimeout(() => {
+          this.$nextTick(async () => {
+            let titleHeight = await this.getRect('#get-title')
+            let itemHeight = await this.getRect('#get-item')
+            let lineHeight = await this.getRect('#line')
+            this.titleHeight = titleHeight
+            this.itemHeight = itemHeight
+            this.lineHeight = lineHeight
+            this.setHeight(data)
+          })
+        }, 200)
       } catch (err) {
         console.log('获取店铺菜单失败', err)
       }
@@ -474,8 +490,11 @@ export default {
     async getForHereShop () {
       try {
         let { data } = await this.$http.post('/getForHereShop', {
-          shop_id: 2
+          shop_id: this.$store.state.shopFood.shopId
         })
+        if (!data.announcement) {
+          data.announcement = '公告：商家暂无发布信息'
+        }
         this.shopInfo = data
         this.$store.commit('SET_SHOP_INFO', data)
       } catch (err) {
