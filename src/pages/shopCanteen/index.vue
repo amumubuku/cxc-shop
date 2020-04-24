@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrap dis-flex vertical">
-    <div v-if="shopInfo" class="top dis-flex flex-middle">
+    <div id="shop-info" v-if="shopInfo" class="top dis-flex flex-middle">
       <div class="logo" :style="{
         background: 'url(' + shopInfo.icon + ')'
       }"></div>
@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div v-if="shopList.length" class="body dis-flex flex">
+    <div :style="'height: ' + bodyHeight + 'px'" v-if="shopList.length" class="body dis-flex">
       <div class="class-list">
         <div @click="setClassIndex(index)" v-for="(item, index) in shopList" :key="index" class="item" :class="nowClassIndex == index && 'active'">
           <span class="clamp-2">{{item.title}}</span>
@@ -77,7 +77,7 @@
         </div>
       </scroll-view>
     </div>
-    <div @click="openCartList" class="bottom dis-flex flex-middle flex-between">
+    <div id="bottom" @click="openCartList" class="bottom dis-flex flex-middle flex-between">
       <div class="dis-flex flex-middle">
         <div class="cart-icon" :class="allFoodNum && 'active'">
           <div v-if="allFoodNum" class="num">{{allFoodNum}}</div>
@@ -199,7 +199,9 @@ export default {
       // 滚动条位置
       scrollTop: 0,
       // 分割线高度
-      lineHeight: 0
+      lineHeight: 0,
+      // body节点高度
+      bodyHeight: 0
     }
   },
   computed: {
@@ -257,11 +259,35 @@ export default {
         this.nowClassIndex = findIndex
       }
     },
+    // 重复获取
+    async repeat () {
+      let titleHeight = await this.getRect('#get-title')
+      let itemHeight = await this.getRect('#get-item')
+      let lineHeight = await this.getRect('#line')
+      let bototmHeight = await this.getRect('#bottom')
+      let shopInfoHeight = await this.getRect('#shop-info')
+      this.titleHeight = titleHeight
+      this.itemHeight = itemHeight
+      this.lineHeight = lineHeight
+      try {
+        const res = wx.getSystemInfoSync()
+        this.bodyHeight = res.windowHeight - bototmHeight - shopInfoHeight
+      } catch (e) {
+        // Do something when catch error
+      }
+      this.setHeight(this.shopList)
+    },
     // 获取dom数据
     getRect (id) {
+      let _this = this
       return new Promise((resolve, reject) => {
         wx.createSelectorQuery().select(id).boundingClientRect(function (rect) {
-          resolve(rect.height)
+          if (!rect) {
+            _this.repeat()
+            resolve(0)
+          } else {
+            resolve(rect.height)
+          }
         }).exec()
       })
     },
@@ -471,17 +497,7 @@ export default {
         })
         data = this.handleData(data)
         this.$store.commit('SET_SHOP_LIST', data)
-        setTimeout(() => {
-          this.$nextTick(async () => {
-            let titleHeight = await this.getRect('#get-title')
-            let itemHeight = await this.getRect('#get-item')
-            let lineHeight = await this.getRect('#line')
-            this.titleHeight = titleHeight
-            this.itemHeight = itemHeight
-            this.lineHeight = lineHeight
-            this.setHeight(data)
-          })
-        }, 200)
+        this.repeat()
       } catch (err) {
         console.log('获取店铺菜单失败', err)
       }
