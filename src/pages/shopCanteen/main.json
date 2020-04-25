@@ -2,5 +2,6 @@
   "backgroundTextStyle":"dark",
   "navigationBarTitleText": "叮叮点堂食",
   "navigationBarTextStyle": "white",
-  "navigationBarBackgroundColor": "#2C2D31"
+  "navigationBarBackgroundColor": "#2C2D31",
+  "disableScroll": true
 }

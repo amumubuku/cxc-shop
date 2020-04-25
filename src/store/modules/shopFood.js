@@ -99,7 +99,7 @@ const getters = {
       let catchItem = JSON.parse(JSON.stringify(item))
       catchItem.price = num * price
       let desAry = []
-      desAry.push(item.sku[item.skuIndex].id)
+      desAry.push(item.sku[item.skuIndex].title)
       item.attribute.forEach(_item => {
         desAry.push(_item.attrs[_item.attrsIndex].title)
       })

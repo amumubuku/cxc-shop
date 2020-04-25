@@ -3,12 +3,12 @@
     <div class="search-wrap dis-flex flex-middle">
       <div class="input-wrap dis-flex flex-middle flex">
         <div class="input-icon"></div>
-        <input v-model="searchKey" class="input dis-flex flex" type="text">
+        <input :placeholder="shopList[0].goods[0].title" v-model="searchKey" class="input dis-flex flex" type="text">
         <div v-if="searchKey" @click="clearSearchKey" class="clear"></div>
       </div>
-      <div @click="search" class="btn">搜索</div>
-      <div class="cart-icon">
-        <div class="num">{{allFoodNum}}</div>
+      <div v-if="!storeSearchKey" @click="search" class="btn">搜索</div>
+      <div v-if="storeSearchKey != null" class="cart-icon">
+        <div class="num dis-flex flex-middle flex-center">{{allFoodNum}}</div>
       </div>
     </div>
     <div v-if="searchResult.length" class="list">
@@ -22,7 +22,7 @@
           <div class="stock">库存 {{item.stock}}</div>
         </div>
         <div class="price-add dis-flex flex-middle flex-between">
-          <div class="price">¥{{item.sku[item.skuIndex].price}}</div>
+          <div class="price DINN">¥{{item.sku[item.skuIndex].price}}</div>
           <!-- <div class="add-btn">+</div> -->
           <div @click="selectClass(item)" v-if="item.hasMoreAttrs" class="btn dis-flex flex-middle flex-center">选规格</div>
           <div v-else class="select-num dis-flex flex-middle">
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div v-else class="no-list dis-flex vertical flex-middle flex-center flex">
+    <div v-if="searchResult.length == 0 && storeSearchKey != null" class="no-list dis-flex vertical flex-middle flex-center flex">
       <div class="no-list-icon"></div>
       <div class="no-list-str">哎呀！商品还没添加</div>
     </div>
@@ -67,9 +67,9 @@
             </div>
           </div>
           <div class="select-num dis-flex flex-middle">
-            <div @click="changeAddCartNum(item, -1)" class="change-num-btn">-</div>
+            <div @click="changeAddCartNum(item, -1)" class="change-num-btn"></div>
             <div class="num">{{item.num}}</div>
-            <div @click="changeAddCartNum(item, +1)" class="change-num-btn">+</div>
+            <div @click="changeAddCartNum(item, +1)" class="change-num-btn active"></div>
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@
         <div class="select-num dis-flex flex-middle">
           <div @click="changeSelectGoodsNum(-1)" class="change-num-btn">-</div>
           <div class="num">{{nowSelectGoodsInfo.num}}</div>
-          <div @click="changeSelectGoodsNum(+1)" class="change-num-btn">+</div>
+          <div @click="changeSelectGoodsNum(+1)" class="change-num-btn active">+</div>
         </div>
       </div>
       <div class="attr-list dis-flex vertical">
@@ -131,8 +131,14 @@ export default {
     }
   },
   computed: {
+    shopList () {
+      return this.$store.state.shopFood.shopList
+    },
     searchResult () {
       return this.$store.getters.searchResult
+    },
+    storeSearchKey () {
+      return this.$store.state.shopFood.searchKey
     },
     allFoodNum () {
       return this.$store.getters.allFoodList.cartFoodNum
@@ -164,6 +170,7 @@ export default {
     // 搜索
     search () {
       this.$store.commit('SET_SEARCH_KEY', this.searchKey)
+      console.log(this.$store.state.shopFood.searchKey)
     },
     // 清空搜索
     clearSearchKey () {

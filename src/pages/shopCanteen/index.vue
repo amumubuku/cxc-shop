@@ -65,9 +65,9 @@
                   <div class="price DINN">￥{{_item.sku[_item.skuIndex].price}}</div>
                   <div @click="selectClass(_item)" v-if="_item.hasMoreAttrs" class="btn dis-flex flex-middle flex-center">选规格</div>
                   <div v-else class="select-num dis-flex flex-middle">
-                    <div v-if="_item.num" @click="changeNum(index, _index, -1, _item.num, _item)" class="change-num-btn">-</div>
+                    <div v-if="_item.num" @click="changeNum(index, _index, -1, _item.num, _item)" class="change-num-btn"></div>
                     <div v-if="_item.num" class="num">{{_item.num}}</div>
-                    <div @click="changeNum(index, _index, +1, _item.num, _item)" class="change-num-btn active">+</div>
+                    <div @click="changeNum(index, _index, +1, _item.num, _item)" class="change-num-btn active"></div>
                   </div>
                 </div>
               </div>
@@ -124,9 +124,9 @@
             </div>
           </div>
           <div class="select-num dis-flex flex-middle">
-            <div @click="changeAddCartNum(item, -1)" class="change-num-btn">-</div>
+            <div @click="changeAddCartNum(item, -1)" class="change-num-btn"></div>
             <div class="num">{{item.num}}</div>
-            <div @click="changeAddCartNum(item, +1)" class="change-num-btn">+</div>
+            <div @click="changeAddCartNum(item, +1)" class="change-num-btn"></div>
           </div>
         </div>
       </div>
@@ -144,9 +144,9 @@
           </div>
         </div>
         <div class="select-num dis-flex flex-middle">
-          <div @click="changeSelectGoodsNum(-1)" class="change-num-btn">-</div>
+          <div @click="changeSelectGoodsNum(-1)" class="change-num-btn"></div>
           <div class="num">{{nowSelectGoodsInfo.num}}</div>
-          <div @click="changeSelectGoodsNum(+1)" class="change-num-btn">+</div>
+          <div @click="changeSelectGoodsNum(+1)" class="change-num-btn"></div>
         </div>
       </div>
       <div class="attr-list dis-flex vertical">
