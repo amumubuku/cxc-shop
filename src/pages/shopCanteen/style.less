@@ -4,6 +4,8 @@
   background: rgba(248, 248, 250, 1);
 }
 
+@borderColor: rgba(229,229,229, 0.5);
+
 .top {
   width: 100%;
   padding: 10px 9px 20px 20px;
@@ -130,7 +132,7 @@
         .item {
           padding: 15px 15px 15px 0;
           box-sizing: border-box;
-          border-top: 1px solid rgba(229, 229, 229, 1);
+          border-top: 1px solid @borderColor;
 
           &:nth-of-type(1) {
             border-top: none;
@@ -282,8 +284,8 @@
 
       .line {
         width: 100%;
-        height: 14px;
-        background: rgba(248, 248, 250, 1);
+        height: 1px;
+        background: @borderColor;
       }
     }
   }
@@ -391,7 +393,7 @@
 .cart-list {
   width: 100%;
   position: fixed;
-  bottom: 54px;
+  bottom: 106rpx;
   left: 0;
   border-radius: 10px 10px 0 0;
   overflow: hidden;
@@ -417,6 +419,12 @@
     }
   }
 
+  .list-wrap {
+    width: 100%;
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
   .list {
     width: 100%;
     padding: 0 15px;
@@ -427,7 +435,7 @@
       width: 100%;
       padding: 15px 0;
       box-sizing: border-box;
-      border-top: 1px solid #E5E5E5;
+      border-top: 1px solid @borderColor;
 
       &:nth-of-type(1) {
         border-top: none;
@@ -558,7 +566,8 @@
         line-height: 21px;
 
         &:nth-of-type(3) {
-          background: rgba(255, 145, 0, 1);
+          background: url(https://img.icaixiaochu.com/5ea197da9452c.png);
+          background-size: cover;
           color: #fff;
         }
       }
@@ -582,7 +591,7 @@
       padding-top: 20px;
       padding-bottom: 20px;
       box-sizing: border-box;
-      border-top: 1px solid #E5E5E5;
+      border-top: 1px solid @borderColor;
 
       &:nth-of-type(1) {
         border-top: 0;
@@ -591,7 +600,7 @@
       .item-title {
         font-size: 16px;
         color: rgba(51, 51, 51, 1);
-        font-weight: bold;
+        // font-weight: bold;
       }
 
       .item-list {

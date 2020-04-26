@@ -24,7 +24,7 @@
         </div>
       </div>
       <scroll-view class="food-list" :scroll-top="scrollTop" scroll-y="true" @scroll="scrollRight($event)" @scrolltolower="scrolltolower">
-        <div v-if="!titleHeight && !itemHeight && !lineHeight" class="item-list opacity dis-flex vertical">
+        <div v-if="!titleHeight && !itemHeight" class="item-list opacity dis-flex vertical">
           <div id="get-title" class="item-list-title">测试</div>
           <div id="get-item" class="list dis-flex vertical">
             <div class="item dis-flex flex-middle">
@@ -104,29 +104,31 @@
           <div class="clear-str">清空购物车</div>
         </div>
       </div>
-      <div class="list dis-flex vertical">
-        <div v-for="(item, index) in allFoodList" :key="index" class="item dis-flex flex-middle flex-between">
-          <div class="dis-flex flex-middle flex">
-            <div class="item-img" :style="{
-              background: 'url(' + item.cover + ')'
-            }"></div>
-            <div>
-              <div class="item-wrap dis-flex vertical flex-between">
-                <div class="dis-flex vertical">
-                  <div class="item-title">{{item.title}}</div>
-                  <div class="item-des">{{item.des}}</div>
-                </div>
-                <div class="item-price DINN dis-flex flex-bottom">
-                  <div class="price-icon">¥</div>
-                  <div class="price DINN">{{item.price}}</div>
+      <div class="list-wrap">
+        <div class="list dis-flex vertical">
+          <div v-for="(item, index) in allFoodList" :key="index" class="item dis-flex flex-middle flex-between">
+            <div class="dis-flex flex-middle flex">
+              <div class="item-img" :style="{
+                background: 'url(' + item.cover + ')'
+              }"></div>
+              <div>
+                <div class="item-wrap dis-flex vertical flex-between">
+                  <div class="dis-flex vertical">
+                    <div class="item-title">{{item.title}}</div>
+                    <div class="item-des">{{item.des}}</div>
+                  </div>
+                  <div class="item-price DINN dis-flex flex-bottom">
+                    <div class="price-icon">¥</div>
+                    <div class="price DINN">{{item.price}}</div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="select-num dis-flex flex-middle">
-            <div @click="changeAddCartNum(item, -1)" class="change-num-btn"></div>
-            <div class="num">{{item.num}}</div>
-            <div @click="changeAddCartNum(item, +1)" class="change-num-btn"></div>
+            <div class="select-num dis-flex flex-middle">
+              <div @click="changeAddCartNum(item, -1)" class="change-num-btn"></div>
+              <div class="num">{{item.num}}</div>
+              <div @click="changeAddCartNum(item, +1)" class="change-num-btn"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -150,7 +152,7 @@
         </div>
       </div>
       <div class="attr-list dis-flex vertical">
-        <div class="attr-item dis-flex vertical">
+        <div v-if="nowSelectGoodsInfo.sku.length > 1" class="attr-item dis-flex vertical">
           <div class="item-title">规格</div>
           <div class="item-list dis-flex flex-middle flex-wrap">
             <div @click="changeSku(index)" v-for="(item,index) in nowSelectGoodsInfo.sku" :key="index" class="item dis-flex flex-middle flex-center" :class="index == nowSelectGoodsInfo.skuIndex && 'active'">{{item.title}}</div>
@@ -170,7 +172,7 @@
       <div @click="addCart" class="btn dis-flex flex-middle flex-center">+ 加入购物车</div>
     </div>
 
-    <div v-if="!titleHeight && !itemHeight && !lineHeight" class="white-bg"></div>
+    <div v-if="!titleHeight && !itemHeight" class="white-bg"></div>
   </div>
 </template>
 
@@ -201,7 +203,12 @@ export default {
       // 分割线高度
       lineHeight: 0,
       // body节点高度
-      bodyHeight: 0
+      bodyHeight: 0,
+      // 无法加入购物车文案
+      errStr: {
+        'off-shelf': '商品已下架',
+        'no-stock': '商品暂无库存'
+      }
     }
   },
   computed: {
@@ -263,19 +270,21 @@ export default {
     async repeat () {
       let titleHeight = await this.getRect('#get-title')
       let itemHeight = await this.getRect('#get-item')
-      let lineHeight = await this.getRect('#line')
+      // let lineHeight = await this.getRect('#line')
       let bototmHeight = await this.getRect('#bottom')
       let shopInfoHeight = await this.getRect('#shop-info')
       this.titleHeight = titleHeight
       this.itemHeight = itemHeight
-      this.lineHeight = lineHeight
+      // this.lineHeight = lineHeight
       try {
         const res = wx.getSystemInfoSync()
         this.bodyHeight = res.windowHeight - bototmHeight - shopInfoHeight
       } catch (e) {
         // Do something when catch error
       }
-      this.setHeight(this.shopList)
+      if (titleHeight !== 0 && itemHeight !== 0) {
+        this.setHeight(this.shopList, titleHeight, itemHeight)
+      }
     },
     // 获取dom数据
     getRect (id) {
@@ -384,9 +393,9 @@ export default {
     beforeAddCartCheck (item) {
       let error = ''
       if (item && item.goods_status) {
-        error = 'item.goods_status'
+        error = item.goods_status
         wx.showToast({
-          title: '商品不支持加入购物车',
+          title: this.errStr[item.goods_status],
           icon: 'none',
           duration: 2000
         })
@@ -473,15 +482,15 @@ export default {
       this.scrollTop = this.scrollInterval[index][0]
     },
     // 设置高度
-    setHeight (data) {
+    setHeight (data, ...rest) {
+      let [ titleHeight, itemHeight ] = rest
       let catchData = data
       let nowHeight = 0
       catchData.forEach(item => {
-        let titleHeight = this.titleHeight
-        let itemHeight = this.itemHeight * item.goods.length + item.goods.length + this.lineHeight
+        let listHeight = itemHeight * item.goods.length + item.goods.length
         item.height = nowHeight
         let starTop = nowHeight
-        nowHeight = nowHeight + titleHeight + itemHeight
+        nowHeight = nowHeight + titleHeight + listHeight
         let endTop = nowHeight
         if (starTop !== endTop) {
           this.scrollInterval.push([starTop, endTop])

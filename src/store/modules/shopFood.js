@@ -86,7 +86,7 @@ const getters = {
       item.goods.forEach(_item => {
         if (_item.num !== 0 && _item.hasMoreAttrs === 0) {
           let catchItem = JSON.parse(JSON.stringify(_item))
-          catchItem.price = catchItem.num * catchItem.sku[0].price
+          catchItem.price = parseFloat(catchItem.num * catchItem.sku[0].price).toFixed(2)
           singleAry.push(catchItem)
         }
       })
@@ -97,7 +97,7 @@ const getters = {
       let num = item.num
       let price = item.sku[item.skuIndex].price
       let catchItem = JSON.parse(JSON.stringify(item))
-      catchItem.price = num * price
+      catchItem.price = parseFloat(num * price).toFixed(2)
       let desAry = []
       desAry.push(item.sku[item.skuIndex].title)
       item.attribute.forEach(_item => {

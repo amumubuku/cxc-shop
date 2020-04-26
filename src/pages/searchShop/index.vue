@@ -3,15 +3,15 @@
     <div class="search-wrap dis-flex flex-middle">
       <div class="input-wrap dis-flex flex-middle flex">
         <div class="input-icon"></div>
-        <input :placeholder="shopList[0].goods[0].title" v-model="searchKey" class="input dis-flex flex" type="text">
+        <input placeholder-style="color: #A4A7B4;" :placeholder="shopList[0].goods[0].title" v-model="searchKey" class="input dis-flex flex" type="text">
         <div v-if="searchKey" @click="clearSearchKey" class="clear"></div>
       </div>
       <div v-if="!storeSearchKey" @click="search" class="btn">搜索</div>
-      <div v-if="storeSearchKey != null" class="cart-icon">
+      <div @click="openCartList" v-if="storeSearchKey != null" class="cart-icon">
         <div class="num dis-flex flex-middle flex-center">{{allFoodNum}}</div>
       </div>
     </div>
-    <div v-if="searchResult.length" class="list">
+    <div v-if="searchResult.length" class="search-list">
       <div v-for="(item, index) in searchResult" :key="index" class="item dis-flex vertical flex-middle">
         <div class="item-img" :style="{
           background: 'url(' + item.cover + ')'
@@ -93,7 +93,7 @@
         </div>
       </div>
       <div class="attr-list dis-flex vertical">
-        <div class="attr-item dis-flex vertical">
+        <div v-if="nowSelectGoodsInfo.sku.length > 1" class="attr-item dis-flex vertical">
           <div class="item-title">规格</div>
           <div class="item-list dis-flex flex-middle flex-wrap">
             <div @click="changeSku(index)" v-for="(item,index) in nowSelectGoodsInfo.sku" :key="index" class="item dis-flex flex-middle flex-center" :class="index == nowSelectGoodsInfo.skuIndex && 'active'">{{item.title}}</div>
@@ -127,7 +127,12 @@ export default {
       // 购物车列表
       cartListOff: false,
       // 当前选择商品信息
-      nowSelectGoodsInfo: null
+      nowSelectGoodsInfo: null,
+      // 无法加入购物车文案
+      errStr: {
+        'off-shelf': '商品已下架',
+        'no-stock': '商品暂无库存'
+      }
     }
   },
   computed: {
@@ -165,6 +170,9 @@ export default {
       }
       return str.join('、')
     }
+  },
+  onLoad () {
+    this.searchKey = ''
   },
   methods: {
     // 搜索
@@ -248,9 +256,9 @@ export default {
     beforeAddCartCheck (item) {
       let error = ''
       if (item && item.goods_status) {
-        error = 'item.goods_status'
+        error = item.goods_status
         wx.showToast({
-          title: '商品不支持加入购物车',
+          title: this.errStr[item.goods_status],
           icon: 'none',
           duration: 2000
         })
