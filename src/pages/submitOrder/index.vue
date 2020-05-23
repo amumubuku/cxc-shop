@@ -168,7 +168,7 @@
         <div class="total">
           <div class="food-total">
             <p>合计:</p>
-            <p>￥{{orderPrice < 0.1 ? 0.1:orderPrice}}</p>
+            <p>￥{{orderPrice < 0.01 ? 0.01:orderPrice}}</p>
           </div>
           <p class="menber-total" v-if="cardState">含会员开通费{{giftCard.price}}</p>
         </div>
