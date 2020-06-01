@@ -31,6 +31,8 @@
     "pages/refundedDetail/main",
     "pages/selectAddress/main",
     "pages/login/main",
+    "pages/rate/main",
+    "pages/webview/main",
     "pages/cart/main"
   ],
   "window": {

@@ -47,6 +47,11 @@ export default {
     font-size: 1.2rem;
     font-style: normal;
 }
+@font-face {
+    font-family: 'DIN';
+    src: url("https://img.icaixiaochu.com/DIN-Bold.ttf")
+}
+
 
 .DINN {
   font-family: "DINN";

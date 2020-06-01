@@ -16,6 +16,11 @@ const mutations = {
   SET_ADDRESS: (state, address) => {
     state.curAddress = address
   },
+  LOGIN_OUT: (state, data) => {
+    state.userInfo = ''
+    wx.removeStorage('userInfo')
+    wx.removeStorage('token')
+  },
   SET_LOCATION: (state, location) => {
     state.location = location
   }

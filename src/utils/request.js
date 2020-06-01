@@ -11,7 +11,9 @@ function request (url, method, data = {}, header = {}) {
     let params = Object.assign(data, {
       token,
       lat: data.lat || location.latitude || 0,
+      // lat: 22.795851,
       lng: data.lng || location.longitude || 0
+      // lng: 113.545480
     })
     wx.request({
       url: BASE_URL + url, // 仅为示例，并非真实的接口地址

@@ -1,68 +1,90 @@
 <template>
-  <div class="sort-shop-wrp" >
+  <div class="sort-shop-wrp">
+    <div class="top">
+      <div class="filter-box" @click="change(0)">
+        <p class="name" :class="{ 'action-text': state === 0 }">全部</p>
+        <div class="status" :class="{ action: state === 0 }">周边好店</div>
+      </div>
+      <div class="divider"></div>
+      <div class="filter-box" @click="change(1)">
+        <p class="name" :class="{ 'action-text': state === 1 }">到店自取</p>
+        <div class="status" :class="{ action: state === 1 }">免配送费</div>
+      </div>
+    </div>
     <div class="sort-shop-box" v-if="shoplist.length">
       <div class="sort-content-wrp" v-if="scrollTop <= fixTop - 17">
-      <div class="sort-left">
-        <div class="sort-item" @click="sortShop">
-          <p>{{curSort.label}}</p>
-          <img src="http://p2.icaixiaochu.com/down.png" alt />
-        </div>
-        <!-- <div class="sort-item" @click="chooseValue(sortList[1],0)">
+        <div class="sort-left">
+          <div class="sort-item" @click="sortShop">
+            <p class="active-sort">{{ curSort.label }}</p>
+            <img src="/static/images/arrow-down.png" alt />
+          </div>
+          <!-- <div class="sort-item" @click="chooseValue(sortList[1],0)">
           <p :class="{'active-sort': sortList[1].value === wrapCurSort.value}">{{sortList[1].label}}</p>
         </div>-->
-        <div class="sort-item" @click="chooseValue(sortItem,0)">
-          <p :class="{'active-sort': sortItem.value === wrapCurSort.value}">{{sortItem.label}}</p>
+          <div class="sort-item" @click="chooseValue(sortItem, 0)">
+            <p :class="{ 'active-sort': sortItem.value === wrapCurSort.value }">
+              {{ sortItem.label }}
+            </p>
+          </div>
+        </div>
+        <div class="sort-list" v-if="maskClass === 'active'">
+          <div
+            class="sort-item"
+            v-for="(item, index) in sortList"
+            :key="index"
+            @click="chooseValue(item, 1)"
+            :class="{ 'active-sort': item.value === curSort.value }"
+          >
+            {{ item.label }}
+          </div>
         </div>
       </div>
-      <div class="sort-right" @click="toggleTake">
-        <div class="icon">
-          <i class="circle-icon" :class="{'take-active' : take || ''}"></i>
+      <div v-else>
+        <div class="search-wrap" @click="toSearchPage">
+          <div class="search-box">
+            <img src="/static/images/new-search.png" mode="aspectFill" alt="" />
+            <p>湘味老坛酸菜鱼</p>
+          </div>
         </div>
-        <p>支持自取</p>
-      </div>
-      <div class="sort-list" v-if="maskClass === 'active'">
-        <div
-          class="sort-item"
-          v-for="(item, index) in sortList"
-          :key="index"
-          @click="chooseValue(item,1)"
-          :class="{'active-sort':item.value === curSort.value}"
-        >{{item.label}}</div>
-      </div>
-    </div>
-    <div class="sort-content-wrp new-sort-content-wrp" v-else>
-      <div class="sort-left">
-        <div class="sort-item" @click="sortShop">
-          <p>{{curSort.label}}</p>
-          <img src="http://p2.icaixiaochu.com/down.png" alt />
-        </div>
-        <!-- <div class="sort-item" @click="chooseValue(sortList[1],0)">
+        <div class="sort-content-wrp new-sort-content-wrp">
+          <div class="sort-left">
+            <div class="sort-item" @click="sortShop">
+              <p class="active-sort">{{ curSort.label }}</p>
+              <img src="http://p2.icaixiaochu.com/down.png" alt />
+            </div>
+            <!-- <div class="sort-item" @click="chooseValue(sortList[1],0)">
           <p :class="{'active-sort': sortList[1].value === wrapCurSort.value}">{{sortList[1].label}}</p>
         </div>-->
-        <div class="sort-item" @click="chooseValue(sortItem,0)">
-          <p :class="{'active-sort': sortItem.value === wrapCurSort.value}">{{sortItem.label}}</p>
+            <div class="sort-item" @click="chooseValue(sortItem, 0)">
+              <p
+                :class="{ 'active-sort': sortItem.value === wrapCurSort.value }"
+              >
+                {{ sortItem.label }}
+              </p>
+            </div>
+          </div>
+          <div class="sort-list" v-if="maskClass === 'active'">
+            <div
+              class="sort-item"
+              v-for="(item, index) in sortList"
+              :key="index"
+              :class="{ 'active-sort': item.value === curSort.value }"
+              @click="chooseValue(item, 1)"
+            >
+              {{ item.label }}
+            </div>
+          </div>
         </div>
       </div>
-      <div class="sort-right" @click="toggleTake">
-        <div class="icon">
-          <i class="circle-icon" :class="{'take-active' : take}"></i>
-        </div>
-        <p>支持自取</p>
-      </div>
-      <div class="sort-list" v-if="maskClass === 'active'">
-        <div
-          class="sort-item"
-          v-for="(item, index) in sortList"
-          :key="index"
-          :class="{'active-sort':item.value === curSort.value}"
-          @click="chooseValue(item,1)"
-        >{{item.label}}</div>
-      </div>
+
+      <div
+        class="mask"
+        @click="sortShop"
+        :class="maskClass"
+        catchtouchmove="true"
+      ></div>
+      <shop-list :shops="shoplist"></shop-list>
     </div>
-    <div class="mask" @click="sortShop" :class="maskClass" catchtouchmove="true"></div>
-    <shop-list :shops="shoplist"></shop-list>
-    </div>
-    
   </div>
 </template>
 
@@ -87,6 +109,7 @@ export default {
         label: '销量最高',
         value: 3
       },
+      state: 0,
       wrapCurSort: '',
       sortList: [
         {
@@ -106,6 +129,11 @@ export default {
   },
   components: { shopList },
   methods: {
+    change (state) {
+      this.state = state
+      this.page = 1
+      this.fetchShopList()
+    },
     fetchShopList (type) {
       this.$http
         .post('/fetchShopList', {
@@ -115,9 +143,9 @@ export default {
             : this.curSort
               ? this.curSort.value
               : 0,
-          is_arrival: this.take ? 1 : 0
+          state: this.state
         })
-        .then(res => {
+        .then((res) => {
           if (!this.fixTop) {
             this.getNodeHeight()
           }
@@ -133,7 +161,7 @@ export default {
               image: '',
               duration: 1500,
               mask: false,
-              success: result => {},
+              success: (result) => {},
               fail: () => {},
               complete: () => {}
             })
@@ -183,10 +211,18 @@ export default {
       var query = wx.createSelectorQuery()
       query
         .select('.sort-shop-wrp')
-        .boundingClientRect(res => {
+        .boundingClientRect((res) => {
           this.fixTop = res.top
         })
         .exec()
+    },
+    toSearchPage () {
+      wx.navigateTo({
+        url: '../search/main',
+        success: (result) => {},
+        fail: () => {},
+        complete: () => {}
+      })
     }
   },
   onPageScroll (e) {
@@ -203,6 +239,50 @@ export default {
 
 <style lang="less" scoped>
 .sort-shop-wrp {
+  .top {
+    display: flex;
+    align-items: center;
+    padding: 44rpx 0 0 25rpx;
+    .divider {
+      width: 1rpx;
+      height: 48rpx;
+      background: #e0e4e8;
+      margin: 0 40rpx;
+    }
+    .filter-box {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      .name {
+        font-size: 32rpx;
+        font-weight: 800;
+        line-height: 45rpx;
+        color: #666666;
+      }
+
+      .status {
+        width: 120rpx;
+        height: 37rpx;
+        text-align: center;
+        border-radius: 19rpx;
+        font-size: 24rpx;
+        font-weight: 500;
+        line-height: 37rpx;
+        color: #999999;
+      }
+      .action {
+        color: rgba(255, 255, 255, 1);
+        background: linear-gradient(
+          41deg,
+          rgba(255, 109, 31, 1) 0%,
+          rgba(251, 142, 28, 1) 100%
+        );
+      }
+      .action-text {
+        color: rgba(253, 123, 29, 1);
+      }
+    }
+  }
   .sort-content-wrp {
     position: relative;
     top: -2px;
@@ -211,7 +291,6 @@ export default {
     align-items: center;
     justify-content: space-between;
     padding: 0 14px;
-    background: #fff;
     z-index: 99;
     box-sizing: border-box;
     .sort-left {
@@ -221,16 +300,16 @@ export default {
       .sort-item {
         display: flex;
         align-items: center;
-        margin-right: 14px;
+        margin-right: 80rpx;
         p {
           font-size: 13px;
           font-weight: 400;
           color: #787878;
-          margin-right: 2px;
+          margin-right: 12rpx;
         }
         img {
-          height: 8px;
-          width: 8px;
+          height: 8rpx;
+          width: 14rpx;
         }
       }
       .active-sort {
@@ -253,12 +332,12 @@ export default {
         border: 3px solid rgba(232, 232, 232, 1);
         border-radius: 50%;
         margin-right: 2px;
-        box-sizing:border-box;
+        box-sizing: border-box;
         .circle-icon {
           position: relative;
           width: 6px;
           height: 6px;
-           border: 2px solid #fff;
+          border: 2px solid #fff;
           background: #e8e8e8;
           box-shadow: 0px 0px 3px rgba(255, 159, 30, 0.2);
           border-radius: 50%;
@@ -297,12 +376,44 @@ export default {
       }
     }
   }
+  .search-wrap {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 40px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    .search-box {
+      width: 702rpx;
+      height: 64rpx;
+      background: rgba(239, 241, 242, 1);
+      border-radius: 34rpx;
+      display: flex;
+      align-items: center;
+      img {
+        width: 34rpx;
+        height: 34rpx;
+        margin: 0 14rpx 0 20rpx;
+      }
+      p {
+        font-size: 28rpx;
+        font-weight: 500;
+        line-height: 40rpx;
+        color: rgba(141, 151, 165, 1);
+      }
+    }
+  }
+
   .new-sort-content-wrp {
     position: fixed;
     top: 40px;
     bottom: 0;
     width: 100%;
     z-index: 9999;
+    background: #fff;
   }
   .mask {
     display: block;

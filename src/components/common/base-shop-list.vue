@@ -11,10 +11,11 @@
             <div class="shop-rate">
               <div class="rate-list">
                 <img
-                  src="https://img.icaixiaochu.com/rate.png"
+                  src="/static/images/new-rate.png"
                   v-for="(item, k) in ~~item.shop_score"
                   :key="k"
                   alt
+                  mode="aspectFill"
                 />
               </div>
               <p>月售{{item.monthly_sale}}</p>

@@ -1,5 +1,4 @@
 {
   "navigationBarTitleText": "我的",
-  "navigationBarBackgroundColor": "#FEC800",
-  "navigationBarTextStyle": "white"
+  "backgroundColor":"#F2F4F8"
 }

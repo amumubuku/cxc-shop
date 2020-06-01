@@ -50,18 +50,17 @@ export default {
   methods: {
     jump (item) {
       let serverHandle = {
-        0: item => {
+        0: (item) => {
           wx.navigateTo({
             url: `../shop/main?shopId=${item.value_id}`
           })
         },
-        1: item => {
+        1: (item) => {
           wx.navigateTo({
             url: `../webview/mai?url=${item.value_id}`
           })
         },
-        2: item => {
-        }
+        2: (item) => {}
       }
       let cb = serverHandle[item.jump_type]
       cb(item)
@@ -81,7 +80,7 @@ export default {
   .banner-wrp {
     position: relative;
     .swiper {
-      height: 120px;
+      height: 190rpx;
       .swiper-item {
         padding: 0 10px;
         box-sizing: border-box;
@@ -103,17 +102,19 @@ export default {
       display: flex;
       justify-content: center;
       position: absolute;
-      bottom: 5px;
+      bottom: 20rpx;
       width: 100%;
       .dot {
         width: 6px;
         height: 6px;
         margin: 0 4px;
-        background-color: rgb(124, 122, 120);
+        background: rgba(255, 255, 255, 1);
+        opacity: 0.5;
         border-radius: 50%;
       }
       .disable {
-        background-color: #FF9F1E;
+        background-color: #fff;
+        opacity: 1;
       }
     }
   }
